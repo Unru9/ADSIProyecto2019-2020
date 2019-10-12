@@ -1,0 +1,99 @@
+package packVista;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.Font;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+
+public class ventanaErrorPuntosInsuficintes extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ventanaErrorPuntosInsuficintes frame = new ventanaErrorPuntosInsuficintes();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public ventanaErrorPuntosInsuficintes() {
+		setTitle("Error");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 210);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(ventanaErrorPuntosInsuficintes.class.getResource("/packImages/Error.PNG")));
+		
+		JLabel lblNewLabel_1 = new JLabel("Lo sentimos.");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		
+		JButton btnAceptar = new JButton("Aceptar");
+		
+		JLabel lblNoTienesPuntos = new JLabel("No tienes puntos suficientes para comprar este arma");
+		lblNoTienesPuntos.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNoTienesPuntos.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(79)
+							.addComponent(lblNewLabel)
+							.addGap(39)
+							.addComponent(lblNewLabel_1))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(30)
+							.addComponent(lblNoTienesPuntos, GroupLayout.PREFERRED_SIZE, 323, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(159)
+							.addComponent(btnAceptar)))
+					.addContainerGap(71, Short.MAX_VALUE))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap(24, Short.MAX_VALUE)
+							.addComponent(lblNewLabel)
+							.addGap(7))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(34)
+							.addComponent(lblNewLabel_1)
+							.addGap(18)))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblNoTienesPuntos, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(btnAceptar)
+					.addGap(38))
+		);
+		contentPane.setLayout(gl_contentPane);
+	}
+
+}
