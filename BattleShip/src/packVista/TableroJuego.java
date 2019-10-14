@@ -821,7 +821,9 @@ public class TableroJuego extends JFrame implements Observer {
 				}
 				if (Battleship.getBattleship().hasPerdido() && Battleship.getBattleship().getAvisar()) {
 					System.out.println("HAS PERDIDO\n");
-					JOptionPane.showMessageDialog(null, "¡Has perdido!", "Alerta", JOptionPane.WARNING_MESSAGE);
+					//JOptionPane.showMessageDialog(null, "¡Has perdido!", "Alerta", JOptionPane.WARNING_MESSAGE);
+					VentanaJuegoPerdedor c= new VentanaJuegoPerdedor();
+					c.setVisible(true);
 					Battleship.getBattleship().noAvisarMas();
 					finalizarJuego();
 				}
@@ -862,7 +864,9 @@ public class TableroJuego extends JFrame implements Observer {
 				}
 				if (Battleship.getBattleship().hasGanado() && Battleship.getBattleship().getAvisar()) {
 					System.out.println("HAS GANADO\n");
-					JOptionPane.showMessageDialog(null, "¡Has ganado!", "Alerta", JOptionPane.WARNING_MESSAGE);
+					//JOptionPane.showMessageDialog(null, "¡Has ganado!", "Alerta", JOptionPane.WARNING_MESSAGE);
+					VentanaJuegoGanador c = new VentanaJuegoGanador();
+					c.setVisible(true);
 					Battleship.getBattleship().noAvisarMas();
 					finalizarJuego();
 				}
