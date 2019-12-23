@@ -9,9 +9,15 @@ import packModelo.packBarcos.BarcoNoEncException;
 import packModelo.packCoordenada.Coordenada;
 
 public class Usuario extends Jugador {
+	
+	private String email;
 
 	public Usuario() {
 		super();
+	}
+	
+	public String getEmail() {
+		return email;
 	}
 
 	public void colocarBarco(Barco pBarco) {

@@ -14,11 +14,13 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class pantallaPrincipal extends JFrame {
 
 	private JPanel contentPane;
-
+	private static pantallaPrincipal miPantallaPrincipal;
 	/**
 	 * Launch the application.
 	 */
@@ -35,10 +37,17 @@ public class pantallaPrincipal extends JFrame {
 		});
 	}
 
+	public static pantallaPrincipal getMiPantallaPrincipal() {
+		if(miPantallaPrincipal == null) {
+			miPantallaPrincipal = new pantallaPrincipal();
+		}
+		return miPantallaPrincipal;
+	}
+
 	/**
 	 * Create the frame.
 	 */
-	public pantallaPrincipal() {
+	private pantallaPrincipal() {
 		setTitle("Menu Inicial");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 610, 660);
@@ -56,6 +65,13 @@ public class pantallaPrincipal extends JFrame {
 		});
 		
 		JButton btnTienda = new JButton("Tienda");
+		btnTienda.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				menuTienda.getMenuTienda().setVisible(true);
+				dispose();
+			}
+		});
 		
 		JButton btnRanking = new JButton("Ranking");
 		

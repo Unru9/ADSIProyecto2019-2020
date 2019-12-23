@@ -7,6 +7,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import packControlador.ContTienda.gestorTienda;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -14,10 +17,13 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class menuTienda extends JFrame {
 
 	private JPanel contentPane;
+	private static menuTienda miMenuTienda;
 
 	/**
 	 * Launch the application.
@@ -34,11 +40,26 @@ public class menuTienda extends JFrame {
 			}
 		});
 	}
-
+	
+	public static menuTienda getMenuTienda() {
+		if(miMenuTienda == null) {
+			miMenuTienda = new menuTienda();
+		}
+		return miMenuTienda;
+	}
+	
+	public String getEmail() {
+		return gestorTienda.getMiGestorTeinda().getEmail();
+	}
+	
+	/*public int getPuntosUsuario() {
+		
+	}*/
+	
 	/**
 	 * Create the frame.
 	 */
-	public menuTienda() {
+	private menuTienda() {
 		setTitle("Tienda");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -46,6 +67,10 @@ public class menuTienda extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
+		JLabel lblPuntosJugador = new JLabel("PUNTOS JUGADOR: ");
+		
+		JLabel lblX = new JLabel("");
+				
 		JButton btnNewButton = new JButton("ESCUDO");
 		
 		JButton btnMisil = new JButton("MISIL");
@@ -69,12 +94,17 @@ public class menuTienda extends JFrame {
 		JLabel lblTienda = new JLabel("TIENDA");
 		lblTienda.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblTienda.setHorizontalAlignment(SwingConstants.CENTER);
+			
 		
-		JLabel lblPuntosJugador = new JLabel("PUNTOS JUGADOR: ");
-		
-		JLabel lblX = new JLabel("X");
-		
+				
 		JButton btnSalir = new JButton("ATRAS");
+		btnSalir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				pantallaPrincipal.getMiPantallaPrincipal().setVisible(true);
+				dispose();
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
