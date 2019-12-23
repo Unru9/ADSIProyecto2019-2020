@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 public class pantallaPrincipal extends JFrame {
 
@@ -68,7 +69,12 @@ public class pantallaPrincipal extends JFrame {
 		btnTienda.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				menuTienda.getMenuTienda().setVisible(true);
+				try {
+					menuTienda.getMenuTienda().setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				dispose();
 			}
 		});

@@ -1,5 +1,11 @@
 package packControlador.ContTienda;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.mysql.cj.protocol.Resultset;
+
+import packGestores.GestorBD;
 import packModelo.Battleship;
 
 public class gestorTienda {
@@ -21,8 +27,11 @@ public class gestorTienda {
 		return Battleship.getBattleship().getUsuario().getEmail();
 	}
 	
-	/*public int getPuntosUsuario() {
-		
-	}*/
+	public ResultSet getPuntosUsuario() throws SQLException {
+		String email = getEmail();
+		String url = "SELECT puntos FROM Usuario WHERE emailUsuario = "+email+"";
+		ResultSet rs = GestorBD.getMiGestorBD().execSQLSelect(url);
+		return rs;
+	}
 
 }

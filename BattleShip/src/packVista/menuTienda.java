@@ -19,6 +19,8 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class menuTienda extends JFrame {
 
@@ -41,7 +43,7 @@ public class menuTienda extends JFrame {
 		});
 	}
 	
-	public static menuTienda getMenuTienda() {
+	public static menuTienda getMenuTienda() throws SQLException {
 		if(miMenuTienda == null) {
 			miMenuTienda = new menuTienda();
 		}
@@ -52,14 +54,16 @@ public class menuTienda extends JFrame {
 		return gestorTienda.getMiGestorTeinda().getEmail();
 	}
 	
-	/*public int getPuntosUsuario() {
-		
-	}*/
+	public ResultSet getPuntosUsuario() throws SQLException {		
+		ResultSet rs = gestorTienda.getMiGestorTeinda().getPuntosUsuario();
+		return rs;
+	}
 	
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
-	private menuTienda() {
+	private menuTienda() throws SQLException {
 		setTitle("Tienda");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -69,8 +73,12 @@ public class menuTienda extends JFrame {
 		
 		JLabel lblPuntosJugador = new JLabel("PUNTOS JUGADOR: ");
 		
+		
 		JLabel lblX = new JLabel("");
+		
+		lblX.setText(getPuntosUsuario().toString());
 				
+		
 		JButton btnNewButton = new JButton("ESCUDO");
 		
 		JButton btnMisil = new JButton("MISIL");

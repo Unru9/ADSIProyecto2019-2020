@@ -25,7 +25,7 @@ public class GestorBD {
 	//Conexion a la BD en localhost
 	public void conectar() throws SQLException { 	
 		
-		myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/barbestial", "root", "");
+		myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Battleship", "root", "");
 
 		if(myConn.isClosed() == false)
 		{
