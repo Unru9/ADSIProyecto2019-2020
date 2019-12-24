@@ -1,32 +1,27 @@
 package packVista;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import packControlador.ContTienda.gestorTienda;
-import packGestores.GestorBD;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.sql.SQLException;
+import javax.swing.border.EmptyBorder;
 
-import org.json.JSONArray;
-import org.json.JSONException;
+import packControlador.ContPantallaPrincipal.controladorPantPrincipal;
 
 public class pantallaPrincipal extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private static pantallaPrincipal miPantallaPrincipal;
 	/**
@@ -73,24 +68,14 @@ public class pantallaPrincipal extends JFrame {
 		});
 		
 		JButton btnTienda = new JButton("Tienda");
-		btnTienda.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				menuTienda menu = null;
-				try {
-					menu = new menuTienda(gestorTienda.getMiGestorTeinda().getPuntosUsuario());
-					menu.setVisible(true);
-					dispose();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnTienda.addActionListener(new controladorPantPrincipal());
+		btnTienda.setActionCommand("tienda");
 		
 		JButton btnRanking = new JButton("Ranking");
 		
 		JButton btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new controladorPantPrincipal());
+		btnSalir.setActionCommand("salir");
 		
 		JButton btnConfigurarNivel = new JButton("Configurar Nivel");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
