@@ -1,191 +1,294 @@
 
 package packVista;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import packControlador.ContTienda.gestorTienda;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
-import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.swing.border.EmptyBorder;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import javax.swing.JSeparator;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import java.awt.Color;
 
 public class menuTienda extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private static menuTienda miMenuTienda;
-
+	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					menuTienda frame = new menuTienda();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	
-	public static menuTienda getMenuTienda() throws SQLException {
-		if(miMenuTienda == null) {
-			miMenuTienda = new menuTienda();
-		}
-		return miMenuTienda;
-	}
-	
-	public String getEmail() {
-		return gestorTienda.getMiGestorTeinda().getEmail();
-	}
-	
-	public ResultSet getPuntosUsuario() throws SQLException {		
-		ResultSet rs = gestorTienda.getMiGestorTeinda().getPuntosUsuario();
-		return rs;
-	}
-	
-	/**
-	 * Create the frame.
-	 * @throws SQLException 
-	 */
-	private menuTienda() throws SQLException {
-		setTitle("Tienda");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+	public menuTienda(JSONArray pDatos) throws SQLException, JSONException {
 		
-		JLabel lblPuntosJugador = new JLabel("PUNTOS JUGADOR: ");
-		
-		
-		JLabel lblX = new JLabel("");
-		
-		lblX.setText(getPuntosUsuario().toString());
-				
-		
-		JButton btnNewButton = new JButton("ESCUDO");
-		
-		JButton btnMisil = new JButton("MISIL");
-		
-		JButton btnMisilEo = new JButton("MISIL EO");
-		
-		JButton btnMisilNs = new JButton("MISIL NS");
-		
-		JButton btnMisilBoom = new JButton("MISIL BOOM");
-		
-		JLabel lblPt = new JLabel("25 PT");
-		
-		JLabel lblPt_1 = new JLabel("10 PT");
-		
-		JLabel lblPt_2 = new JLabel("45 PT");
-		
-		JLabel lblPt_3 = new JLabel("45 PT");
-		
-		JLabel lblPt_4 = new JLabel("90 PT");
-		
-		JLabel lblTienda = new JLabel("TIENDA");
-		lblTienda.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblTienda.setHorizontalAlignment(SwingConstants.CENTER);
+		for (int i = 0; i < pDatos.length(); i++) 
+		{
+			org.json.JSONObject one = pDatos.getJSONObject(i);
+			int puntos = one.getInt("puntos");
+			System.out.println("AQUI"+puntos);
 			
-		
-				
-		JButton btnSalir = new JButton("ATRAS");
-		btnSalir.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				pantallaPrincipal.getMiPantallaPrincipal().setVisible(true);
+			if(puntos <= 0) {
+				ventanaErrorNoPuntos vt = new ventanaErrorNoPuntos();
+				vt.setVisible(true);
 				dispose();
 			}
-		});
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(110)
-					.addComponent(lblTienda, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(126, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnNewButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-						.addComponent(btnMisilEo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-						.addComponent(btnMisilNs, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-						.addComponent(btnMisilBoom, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-						.addComponent(btnMisil, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblPt_4)
-								.addComponent(lblPt_3, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblPt_2))
-							.addGap(83)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnSalir, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblPuntosJugador)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblX, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))))
-						.addComponent(lblPt_1, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblPt, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
-					.addGap(17))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblTienda, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
-					.addGap(12)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblPt))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnMisil)
-						.addComponent(lblPt_1))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblPuntosJugador, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblX, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnMisilEo)
-								.addComponent(lblPt_2))
-							.addPreferredGap(ComponentPlacement.UNRELATED)))
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnSalir)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnMisilNs)
-								.addComponent(lblPt_3))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnMisilBoom)
-								.addComponent(lblPt_4))))
-					.addGap(42))
-		);
-		contentPane.setLayout(gl_contentPane);
-	}
+			else {
+				
+				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				
+				setTitle("Tienda");
+				setBounds(100, 100, 564, 479);
+				contentPane = new JPanel();
+				contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+				setContentPane(contentPane);
+				
+				JLabel lblNewLabel = new JLabel("TIENDA");
+				lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 37));
+				
+				JLabel lblNombreDelArma = new JLabel("Nombre del Arma");
+				lblNombreDelArma.setForeground(Color.BLACK);
+				lblNombreDelArma.setBackground(Color.WHITE);
+				lblNombreDelArma.setFont(new Font("Tahoma", Font.BOLD, 14));
+				
+				JLabel lblNewLabel_1 = new JLabel("Precio del Arma");
+				lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+				
+				JLabel lblNewLabel_2 = new JLabel("Cantidad en tu Stock");
+				lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+				
+				JButton btnNewButton = new JButton("ESCUDO");
+				
+				JLabel lblNewLabel_3 = new JLabel("25 Puntos");
+				lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+				
+				JLabel lblNewLabel_4 = new JLabel("");
+				lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+				
+				JSeparator separator = new JSeparator();
+				
+				JButton btnNewButton_1 = new JButton("MISIL");
+				
+				JLabel lblNewLabel_5 = new JLabel("10 Puntos");
+				lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
+				lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				
+				JLabel lblNewLabel_6 = new JLabel("");
+				lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
+				
+				JSeparator separator_1 = new JSeparator();
+				
+				JSeparator separator_2 = new JSeparator();
+				
+				JButton btnNewButton_2 = new JButton("MISIL EO");
+				
+				JSeparator separator_3 = new JSeparator();
+				
+				JButton btnNewButton_3 = new JButton("MISIL NS");
+				
+				JSeparator separator_4 = new JSeparator();
+				
+				JButton btnNewButton_4 = new JButton("MISIL BOOM");
+				
+				JSeparator separator_5 = new JSeparator();
+				
+				JLabel lblNewLabel_7 = new JLabel("PUNTOS DEL JUGADOR");
+				lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 12));
+				lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
+				
+				JLabel ptosJugador = new JLabel("");
+				ptosJugador.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				
+				//METER EL JSON DE LOS PUNTOS EN LA PANTALLA
+				String ptos = ""+puntos;
+				ptosJugador.setText(ptos);
+				
+				JButton btnAtras = new JButton("ATRAS");
+				btnAtras.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
 
+						pantallaPrincipal.getMiPantallaPrincipal().setVisible(true);
+						dispose();
+					}
+				});
+				
+				JLabel lblPuntos = new JLabel("45 Puntos");
+				lblPuntos.setHorizontalAlignment(SwingConstants.CENTER);
+				lblPuntos.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				
+				JLabel label = new JLabel("45 Puntos");
+				label.setHorizontalAlignment(SwingConstants.CENTER);
+				label.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				
+				JLabel lblPuntos_1 = new JLabel("90 Puntos");
+				lblPuntos_1.setHorizontalAlignment(SwingConstants.CENTER);
+				lblPuntos_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				
+				JLabel label_1 = new JLabel("");
+				label_1.setHorizontalAlignment(SwingConstants.CENTER);
+				label_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				
+				JLabel label_2 = new JLabel("");
+				label_2.setHorizontalAlignment(SwingConstants.CENTER);
+				label_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				
+				JLabel label_3 = new JLabel("");
+				label_3.setHorizontalAlignment(SwingConstants.CENTER);
+				label_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
+				GroupLayout groupLayout = new GroupLayout(getContentPane());
+				groupLayout.setHorizontalGroup(
+					groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(31)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(lblNombreDelArma, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addGroup(groupLayout.createSequentialGroup()
+													.addGap(47)
+													.addComponent(lblNewLabel_1))
+												.addGroup(groupLayout.createSequentialGroup()
+													.addGap(40)
+													.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)))
+											.addGap(18)
+											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addComponent(lblNewLabel_4, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+												.addComponent(lblNewLabel_2)))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(separator, GroupLayout.PREFERRED_SIZE, 451, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)
+											.addGap(46)
+											.addComponent(lblNewLabel_5, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+											.addGap(40)
+											.addComponent(lblNewLabel_6, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
+										.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, 451, GroupLayout.PREFERRED_SIZE)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(separator_2, GroupLayout.PREFERRED_SIZE, 451, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED))
+										.addComponent(separator_3, GroupLayout.PREFERRED_SIZE, 451, GroupLayout.PREFERRED_SIZE)
+										.addComponent(separator_4, GroupLayout.PREFERRED_SIZE, 451, GroupLayout.PREFERRED_SIZE)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(btnNewButton_4, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+											.addGap(44)
+											.addComponent(lblPuntos_1, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+											.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(btnNewButton_3, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+											.addGap(45)
+											.addComponent(label, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+											.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+											.addGap(46)
+											.addComponent(lblPuntos, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+											.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE))
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+											.addGroup(groupLayout.createSequentialGroup()
+												.addComponent(lblNewLabel_7, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(ptosJugador, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(btnAtras, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
+											.addComponent(separator_5, GroupLayout.PREFERRED_SIZE, 451, GroupLayout.PREFERRED_SIZE))))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(186)
+									.addComponent(lblNewLabel)))
+							.addGap(24))
+				);
+				groupLayout.setVerticalGroup(
+					groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(35)
+							.addComponent(lblNewLabel)
+							.addGap(42)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNombreDelArma)
+								.addComponent(lblNewLabel_1)
+								.addComponent(lblNewLabel_2))
+							.addGap(10)
+							.addComponent(separator_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+									.addComponent(btnNewButton)
+									.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+								.addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnNewButton_1)
+								.addComponent(lblNewLabel_6, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel_5, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(separator_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+									.addComponent(btnNewButton_2)
+									.addComponent(lblPuntos, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
+								.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(separator_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+									.addComponent(btnNewButton_3)
+									.addComponent(label, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
+								.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(separator_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+									.addComponent(btnNewButton_4)
+									.addComponent(lblPuntos_1, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
+								.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(separator_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(28)
+									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+										.addComponent(lblNewLabel_7, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+										.addComponent(ptosJugador, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(26)
+									.addComponent(btnAtras)))
+							.addContainerGap(35, Short.MAX_VALUE))
+				);
+				getContentPane().setLayout(groupLayout);
+				
+				
+			}
+				
+		}
+		
+		
+	}
 }

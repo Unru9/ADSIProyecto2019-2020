@@ -14,6 +14,7 @@ public class GestorBD {
 	private Statement myStmt;
 
 	private GestorBD() {
+		
 	}
 	public static GestorBD getMiGestorBD() {
 		if (miGestorBD == null) {

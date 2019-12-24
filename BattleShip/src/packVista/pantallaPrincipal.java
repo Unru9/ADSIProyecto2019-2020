@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import packControlador.ContTienda.gestorTienda;
+import packGestores.GestorBD;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -17,6 +21,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class pantallaPrincipal extends JFrame {
 
@@ -69,13 +76,15 @@ public class pantallaPrincipal extends JFrame {
 		btnTienda.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				menuTienda menu = null;
 				try {
-					menuTienda.getMenuTienda().setVisible(true);
-				} catch (SQLException e1) {
+					menu = new menuTienda(gestorTienda.getMiGestorTeinda().getPuntosUsuario());
+					menu.setVisible(true);
+					dispose();
+				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				dispose();
 			}
 		});
 		
