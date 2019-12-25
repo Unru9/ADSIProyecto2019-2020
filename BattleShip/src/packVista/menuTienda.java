@@ -1,7 +1,9 @@
 
 package packVista;
 
+import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.Vector;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -15,6 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import packControlador.ContTienda.controladorTienda;
 import packGestores.gestorTienda;
@@ -24,6 +27,12 @@ public class menuTienda extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private static menuTienda miMenuTienda;
+	private JLabel escudo;
+	private JLabel misil;
+	private JLabel misilEO;
+	private JLabel misilNS;
+	private JLabel misilBOOM;
+	private JLabel puntosJug;
 	
 	/**
 	 * Launch the application.
@@ -40,7 +49,8 @@ public class menuTienda extends JFrame {
 	
 	private menuTienda() throws Exception {
 		
-		JSONArray pDatos = gestorTienda.getMiGestorTeinda().getPuntosUsuarioYStock();
+		setResizable(false);
+				
 		setTitle("Tienda");
 		setBounds(100, 100, 550, 500);
 		contentPane = new JPanel();
@@ -72,7 +82,7 @@ public class menuTienda extends JFrame {
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
-		JLabel escudo = new JLabel("");
+		escudo = new JLabel("");
 		escudo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		escudo.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -86,7 +96,7 @@ public class menuTienda extends JFrame {
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
-		JLabel misil = new JLabel("");
+		misil = new JLabel("");
 		misil.setHorizontalAlignment(SwingConstants.CENTER);
 		misil.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
@@ -100,7 +110,7 @@ public class menuTienda extends JFrame {
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
-		JLabel misilEO = new JLabel("");
+		misilEO = new JLabel("");
 		misilEO.setHorizontalAlignment(SwingConstants.CENTER);
 		misilEO.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
@@ -114,7 +124,7 @@ public class menuTienda extends JFrame {
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
 		label_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
-		JLabel misilNS = new JLabel("");
+		misilNS = new JLabel("");
 		misilNS.setHorizontalAlignment(SwingConstants.CENTER);
 		misilNS.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
@@ -130,7 +140,7 @@ public class menuTienda extends JFrame {
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
 		label_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
-		JLabel misilBOOM = new JLabel("");
+		misilBOOM = new JLabel("");
 		misilBOOM.setHorizontalAlignment(SwingConstants.CENTER);
 		misilBOOM.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
@@ -140,7 +150,7 @@ public class menuTienda extends JFrame {
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
-		JLabel puntosJug = new JLabel("");
+		puntosJug = new JLabel("");
 		puntosJug.setHorizontalAlignment(SwingConstants.CENTER);
 		puntosJug.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
@@ -148,31 +158,27 @@ public class menuTienda extends JFrame {
 		btnAtras.addActionListener(new controladorTienda());
 		btnAtras.setActionCommand("atras");
 		
+		JSONArray pDatos = gestorTienda.getMiGestorTeinda().getPuntosUsuarioYStock();
 		
 		for (int i = 0; i < pDatos.length(); i++) 
 		{
 			org.json.JSONObject one = pDatos.getJSONObject(i);
-			int puntos = one.getInt("precio");
+			int puntos = one.getInt("puntos");
 			int escudos = one.getInt("escudos");
 			int misiles = one.getInt("misiles");
 			int misilesEO = one.getInt("misileseo");
 			int misilesNS = one.getInt("misilesns");
 			int misilesBOOM = one.getInt("misilesboom");
 			
-			if(puntos <= 0) {
-				ventanaErrorNoPuntos vt = new ventanaErrorNoPuntos();
-				vt.setVisible(true);
-				dispose();
-			}
-			else {
-				puntosJug.setText(""+puntos);
-				escudo.setText(""+escudos);
-				misil.setText(""+misiles);
-				misilEO.setText(""+misilesEO);
-				misilNS.setText(""+misilesNS);
-				misilBOOM.setText(""+misilesBOOM);
-			}
+			puntosJug.setText(""+puntos);
+			escudo.setText(""+escudos);
+			misil.setText(""+misiles);
+			misilEO.setText(""+misilesEO);
+			misilNS.setText(""+misilesNS);
+			misilBOOM.setText(""+misilesBOOM);
+			
 		}
+		
 		
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -321,8 +327,30 @@ public class menuTienda extends JFrame {
 							.addComponent(btnAtras)))
 					.addContainerGap(56, Short.MAX_VALUE))
 		);
-		getContentPane().setLayout(groupLayout);
+		getContentPane().setLayout(groupLayout);		
+	}
+	
+	public void actualizarDatos() throws Exception {
 		
+		JSONArray pData = gestorTienda.getMiGestorTeinda().getPuntosUsuarioYStock();
 		
+		for (int i = 0; i < pData.length(); i++) 
+		{
+			org.json.JSONObject one = pData.getJSONObject(i);
+			int puntos = one.getInt("puntos");
+			int escudos = one.getInt("escudos");
+			int misiles = one.getInt("misiles");
+			int misilesEO = one.getInt("misileseo");
+			int misilesNS = one.getInt("misilesns");
+			int misilesBOOM = one.getInt("misilesboom");
+			
+			puntosJug.setText(""+puntos);
+			escudo.setText(""+escudos);
+			misil.setText(""+misiles);
+			misilEO.setText(""+misilesEO);
+			misilNS.setText(""+misilesNS);
+			misilBOOM.setText(""+misilesBOOM);
+			
+		}
 	}
 }

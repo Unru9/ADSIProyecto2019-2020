@@ -1,44 +1,40 @@
 package packVista;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Font;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.Font;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import packControlador.ContTienda.controladorTienda;
 
 public class ventanaErrorPuntosInsuficintes extends JFrame {
 
-	private JPanel contentPane;
-
 	/**
-	 * Launch the application.
+	 * 
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ventanaErrorPuntosInsuficintes frame = new ventanaErrorPuntosInsuficintes();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private static ventanaErrorPuntosInsuficintes miVentana;
+	
+	public static ventanaErrorPuntosInsuficintes getMiVentana() {
+		if(miVentana == null) {
+			miVentana = new ventanaErrorPuntosInsuficintes();
+		}
+		return miVentana;
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public ventanaErrorPuntosInsuficintes() {
+	private ventanaErrorPuntosInsuficintes() {
 		setTitle("Error");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 210);
@@ -53,6 +49,8 @@ public class ventanaErrorPuntosInsuficintes extends JFrame {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
 		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new controladorTienda());
+		btnAceptar.setActionCommand("aceptarNP");
 		
 		JLabel lblNoTienesPuntos = new JLabel("No tienes puntos suficientes para comprar este arma");
 		lblNoTienesPuntos.setHorizontalAlignment(SwingConstants.CENTER);
