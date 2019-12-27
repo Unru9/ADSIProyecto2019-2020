@@ -78,7 +78,6 @@ public class pantallaPrincipal extends JFrame {
 		btnSalir.setActionCommand("salir");
 		
 		JButton btnConfigurarNivel = new JButton("Configurar Nivel");
-		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)

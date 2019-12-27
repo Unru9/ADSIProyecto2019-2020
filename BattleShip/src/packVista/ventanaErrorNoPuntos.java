@@ -16,26 +16,29 @@ import java.awt.event.MouseEvent;
 
 public class ventanaErrorNoPuntos extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private static ventanaErrorNoPuntos miVentana;
 
-	
-	public static ventanaErrorNoPuntos getMiVentana() {
-		if(miVentana == null) {
-			miVentana = new ventanaErrorNoPuntos();
-		}
-		return miVentana;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ventanaErrorNoPuntos frame = new ventanaErrorNoPuntos();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 
 	/**
 	 * Create the frame.
 	 */
-	private ventanaErrorNoPuntos() {
+	public ventanaErrorNoPuntos() {
 		setTitle("Error");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 210);
