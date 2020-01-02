@@ -15,7 +15,7 @@ public class controladorTienda implements ActionListener {
 		// TODO Auto-generated method stub
 		
 		String action = e.getActionCommand();
-		
+		System.out.println("");
 		if(action.equals("atras")) {
 			try {
 				menuTienda.getMiMenuTienda().dispose();
