@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import packModelo.Battleship;
 import packVista.menuTienda;
 import packVista.ventanaErrorPuntosInsuficintes;
 
@@ -35,8 +36,9 @@ public class gestorTienda {
 		
 		JSONArray datos = null;
 		GestorBD.getMiGestorBD().conectar();
+		String email = Battleship.getBattleship().getEmail();
 		//AQUI FALTA EL EMAIL XK NO ESTA IDENTIFICADO String email = getEmail();
-		ResultSet rs = GestorBD.getMiGestorBD().execSQLSelect("SELECT puntos, escudos, misiles, misilesEO, misilesBOOM, misilesNS FROM armamento WHERE emailUsuario = 'lerulolu@gmail.com'");
+		ResultSet rs = GestorBD.getMiGestorBD().execSQLSelect("SELECT puntos, escudos, misiles, misilesEO, misilesBOOM, misilesNS FROM armamento WHERE emailUsuario = '"+email+"'");
 		if(!rs.next()) {
 			JOptionPane.showMessageDialog(null, "No tienes puntos acumulados", "Error", JOptionPane.ERROR_MESSAGE);
     		return null;
@@ -80,9 +82,10 @@ public class gestorTienda {
 		
 		JSONArray datos = null;
 		int puntos = 0;
+		String email = Battleship.getBattleship().getEmail();
 		GestorBD.getMiGestorBD().conectar();
 		//AQUI FALTA EL EMAIL XK NO ESTA IDENTIFICADO String email = getEmail();
-		ResultSet rs = GestorBD.getMiGestorBD().execSQLSelect("SELECT puntos FROM armamento WHERE emailUsuario = 'lerulolu@gmail.com'");
+		ResultSet rs = GestorBD.getMiGestorBD().execSQLSelect("SELECT puntos FROM armamento WHERE emailUsuario = '"+email+"'");
 		if(!rs.next()) {
 			JOptionPane.showMessageDialog(null, "No tienes puntos acumulados", "Error", JOptionPane.ERROR_MESSAGE);
     		return 0;
@@ -107,11 +110,11 @@ public class gestorTienda {
     	
     	GestorBD.getMiGestorBD().conectar();
     	int puntos = getPuntosUsuario();
-    	
+    	String email = Battleship.getBattleship().getEmail();
     	if(pArma == "escudo") {
     		if(puntos >= 25) {
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET escudos = escudos + 1 WHERE emailUsuario = 'lerulolu@gmail.com'");
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET puntos = puntos - 25 WHERE emailUsuario = 'lerulolu@gmail.com'");
+    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET escudos = escudos + 1 WHERE emailUsuario = '"+email+"'");
+    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET puntos = puntos - 25 WHERE emailUsuario = '"+email+"'");
    
     		}
     		else {
@@ -120,15 +123,15 @@ public class gestorTienda {
     		}
     	}else if(pArma == "misil") {
     		if(puntos >= 10) {
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET misiles = misiles + 1 WHERE emailUsuario = 'lerulolu@gmail.com'");
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET puntos = puntos - 10 WHERE emailUsuario = 'lerulolu@gmail.com'");
+    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET misiles = misiles + 1 WHERE emailUsuario = '"+email+"'");
+    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET puntos = puntos - 10 WHERE emailUsuario = '"+email+"'");
     		}else {
     			ventanaErrorPuntosInsuficintes.getMiVentana().setVisible(true);
     			menuTienda.getMiMenuTienda().dispose();
     		}
     	}else if(pArma == "misilEO") {
     		if(puntos >= 45) {
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET misilesEO = misilesEO + 1 WHERE emailUsuario = 'lerulolu@gmail.com'");
+    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET misilesEO = misilesEO + 1 WHERE emailUsuario = '"+email+"'");
     			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET puntos = puntos - 45 WHERE emailUsuario = 'lerulolu@gmail.com'");
     		}else {
     			ventanaErrorPuntosInsuficintes.getMiVentana().setVisible(true);
@@ -136,8 +139,8 @@ public class gestorTienda {
     		}
     	}else if(pArma == "misilNS") {
     		if(puntos >= 45) {
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET misilesNS = misilesNS + 1 WHERE emailUsuario = 'lerulolu@gmail.com'");
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET puntos = puntos - 45 WHERE emailUsuario = 'lerulolu@gmail.com'");
+    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET misilesNS = misilesNS + 1 WHERE emailUsuario = '"+email+"'");
+    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET puntos = puntos - 45 WHERE emailUsuario = '"+email+"'");
     		}else {
     			ventanaErrorPuntosInsuficintes.getMiVentana().setVisible(true);
     			menuTienda.getMiMenuTienda().dispose();
@@ -145,8 +148,8 @@ public class gestorTienda {
  
     	}else if(pArma == "misilBOOM") {
     		if(puntos >= 90) {
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET misilesBOOM = misilesBOOM + 1 WHERE emailUsuario = 'lerulolu@gmail.com'");
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET puntos = puntos - 90 WHERE emailUsuario = 'lerulolu@gmail.com'");
+    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET misilesBOOM = misilesBOOM + 1 WHERE emailUsuario = '"+email+"'");
+    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET puntos = puntos - 90 WHERE emailUsuario = '"+email+"'");
     		}else {
     			ventanaErrorPuntosInsuficintes.getMiVentana().setVisible(true);
     			menuTienda.getMiMenuTienda().dispose();

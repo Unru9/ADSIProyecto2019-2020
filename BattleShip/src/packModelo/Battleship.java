@@ -208,4 +208,8 @@ public class Battleship extends Observable {
 			notifyObservers(cambios);
 		} catch (BarcoNoEncException e) {}
 	}
+	
+	public String getEmail() {
+		return usuario.getEmail();
+	}
 }

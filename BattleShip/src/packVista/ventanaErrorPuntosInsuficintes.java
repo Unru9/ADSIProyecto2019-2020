@@ -94,4 +94,6 @@ public class ventanaErrorPuntosInsuficintes extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 
+	
+
 }
