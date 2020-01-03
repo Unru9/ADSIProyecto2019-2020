@@ -22,7 +22,6 @@ public class gestorTienda {
 		
 	}
 	
-	
 	/*public String getEmail() {
 		return Battleship.getBattleship().getUsuario().getEmail();
 	}*/
