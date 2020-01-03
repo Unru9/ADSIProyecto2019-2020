@@ -332,7 +332,8 @@ public class menuTienda extends JFrame {
 		
 	}
 	
-public void actualizarDatos() throws Exception {
+
+	public void actualizarDatos() throws Exception {
 		
 		JSONArray pData = gestorTienda.getMiGestorTeinda().getPuntosUsuarioYStock();
 		
