@@ -129,16 +129,16 @@ public class gestorTienda {
     		}
     	}else if(pArma == "misilEO") {
     		if(puntos >= 45) {
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET misilesEO = misilesEO + 1 WHERE emailUsuario = 'lerulolu@gmail.com'");
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET puntos = puntos - 45 WHERE emailUsuario = 'lerulolu@gmail.com'");
+    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET misilesEO = misilesEO + 1 WHERE armamentoUsuario = 'Lerulolu'");
+    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET puntos = puntos - 45 WHERE nombreUsuario = 'Lerulolu'");
     		}else {
     			ventanaErrorPuntosInsuficintes.getMiVentana().setVisible(true);
     			menuTienda.getMiMenuTienda().dispose();
     		}
     	}else if(pArma == "misilNS") {
     		if(puntos >= 45) {
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET misilesNS = misilesNS + 1 WHERE emailUsuario = 'lerulolu@gmail.com'");
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET puntos = puntos - 45 WHERE emailUsuario = 'lerulolu@gmail.com'");
+    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET misilesNS = misilesNS + 1 WHERE armamentoUsuario = 'Lerulolu'");
+    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET puntos = puntos - 45 WHERE nombreUsuario = 'Lerulolu'");
     		}else {
     			ventanaErrorPuntosInsuficintes.getMiVentana().setVisible(true);
     			menuTienda.getMiMenuTienda().dispose();
@@ -146,8 +146,8 @@ public class gestorTienda {
  
     	}else if(pArma == "misilBOOM") {
     		if(puntos >= 90) {
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET misilesBOOM = misilesBOOM + 1 WHERE emailUsuario = 'lerulolu@gmail.com'");
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET puntos = puntos - 90 WHERE emailUsuario = 'lerulolu@gmail.com'");
+    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET misilesBOOM = misilesBOOM + 1 WHERE armamentoUsuario = 'Lerulolu'");
+    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET puntos = puntos - 90 WHERE nombreUsuario = 'Lerulolu'");
     		}else {
     			ventanaErrorPuntosInsuficintes.getMiVentana().setVisible(true);
     			menuTienda.getMiMenuTienda().dispose();
