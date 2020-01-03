@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import packControlador.ContTienda.controladorTienda;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -61,6 +64,8 @@ public class ventanaErrorPuntosInsuficintes extends JFrame {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
 		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new controladorTienda());
+		btnAceptar.setActionCommand("aceptarNP");
 		
 		JLabel lblNoTienesPuntos = new JLabel("No tienes puntos suficientes para comprar este arma");
 		lblNoTienesPuntos.setHorizontalAlignment(SwingConstants.CENTER);

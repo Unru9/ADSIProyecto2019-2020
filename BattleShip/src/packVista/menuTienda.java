@@ -78,7 +78,7 @@ public class menuTienda extends JFrame {
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
-		JLabel escudo = new JLabel("");
+		escudo = new JLabel("");
 		escudo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		escudo.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -92,7 +92,7 @@ public class menuTienda extends JFrame {
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
-		JLabel misil = new JLabel("");
+		misil = new JLabel("");
 		misil.setHorizontalAlignment(SwingConstants.CENTER);
 		misil.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
@@ -106,7 +106,7 @@ public class menuTienda extends JFrame {
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
-		JLabel misilEO = new JLabel("");
+		misilEO = new JLabel("");
 		misilEO.setHorizontalAlignment(SwingConstants.CENTER);
 		misilEO.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
@@ -120,7 +120,7 @@ public class menuTienda extends JFrame {
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
 		label_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
-		JLabel misilNS = new JLabel("");
+		misilNS = new JLabel("");
 		misilNS.setHorizontalAlignment(SwingConstants.CENTER);
 		misilNS.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
@@ -136,7 +136,7 @@ public class menuTienda extends JFrame {
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
 		label_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
-		JLabel misilBOOM = new JLabel("");
+		misilBOOM = new JLabel("");
 		misilBOOM.setHorizontalAlignment(SwingConstants.CENTER);
 		misilBOOM.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
@@ -146,7 +146,7 @@ public class menuTienda extends JFrame {
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
-		JLabel puntosJug = new JLabel("");
+		puntosJug = new JLabel("");
 		puntosJug.setHorizontalAlignment(SwingConstants.CENTER);
 		puntosJug.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
@@ -165,20 +165,15 @@ public class menuTienda extends JFrame {
 			int misilesNS = one.getInt("misilesns");
 			int misilesBOOM = one.getInt("misilesboom");
 			
-			if(puntos <= 0) {
-				ventanaErrorNoPuntos vt = new ventanaErrorNoPuntos();
-				vt.setVisible(true);
-				dispose();
-			}
-			else {
-				puntosJug.setText(""+puntos);
-				escudo.setText(""+escudos);
-				misil.setText(""+misiles);
-				misilEO.setText(""+misilesEO);
-				misilNS.setText(""+misilesNS);
-				misilBOOM.setText(""+misilesBOOM);
-			}
+			puntosJug.setText(""+puntos);
+			escudo.setText(""+escudos);
+			misil.setText(""+misiles);
+			misilEO.setText(""+misilesEO);
+			misilNS.setText(""+misilesNS);
+			misilBOOM.setText(""+misilesBOOM);
+			
 		}
+		
 		
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
