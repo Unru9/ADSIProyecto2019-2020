@@ -18,6 +18,14 @@ import javax.swing.SwingConstants;
 public class ventanaErrorPuntosInsuficintes extends JFrame {
 
 	private JPanel contentPane;
+	private static ventanaErrorPuntosInsuficintes miVentana;
+	
+	public static ventanaErrorPuntosInsuficintes getMiVentana() {
+		if(miVentana == null) {
+			miVentana = new ventanaErrorPuntosInsuficintes();
+		}
+		return miVentana;
+	}
 
 	/**
 	 * Launch the application.

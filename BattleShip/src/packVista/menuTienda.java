@@ -24,6 +24,12 @@ public class menuTienda extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private static menuTienda miMenuTienda;
+	private JLabel escudo;
+	private JLabel misil;
+	private JLabel misilEO;
+	private JLabel misilNS;
+	private JLabel misilBOOM;
+	private JLabel puntosJug;
 	
 	/**
 	 * Launch the application.
@@ -152,7 +158,7 @@ public class menuTienda extends JFrame {
 		for (int i = 0; i < pDatos.length(); i++) 
 		{
 			org.json.JSONObject one = pDatos.getJSONObject(i);
-			int puntos = one.getInt("precio");
+			int puntos = one.getInt("puntos");
 			int escudos = one.getInt("escudos");
 			int misiles = one.getInt("misiles");
 			int misilesEO = one.getInt("misileseo");
@@ -324,5 +330,29 @@ public class menuTienda extends JFrame {
 		getContentPane().setLayout(groupLayout);
 		
 		
+	}
+	
+public void actualizarDatos() throws Exception {
+		
+		JSONArray pData = gestorTienda.getMiGestorTeinda().getPuntosUsuarioYStock();
+		
+		for (int i = 0; i < pData.length(); i++) 
+		{
+			org.json.JSONObject one = pData.getJSONObject(i);
+			int puntos = one.getInt("puntos");
+			int escudos = one.getInt("escudos");
+			int misiles = one.getInt("misiles");
+			int misilesEO = one.getInt("misileseo");
+			int misilesNS = one.getInt("misilesns");
+			int misilesBOOM = one.getInt("misilesboom");
+			
+			puntosJug.setText(""+puntos);
+			escudo.setText(""+escudos);
+			misil.setText(""+misiles);
+			misilEO.setText(""+misilesEO);
+			misilNS.setText(""+misilesNS);
+			misilBOOM.setText(""+misilesBOOM);
+			
+		}
 	}
 }
