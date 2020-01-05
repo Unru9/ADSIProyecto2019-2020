@@ -8,7 +8,6 @@ import java.sql.Statement;
 
 
 public class GestorBD {
-	
 	private static GestorBD miGestorBD;
 	private Connection myConn;
 	private Statement myStmt;

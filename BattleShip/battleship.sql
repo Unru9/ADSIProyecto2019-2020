@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-12-2019 a las 12:34:25
--- Versión del servidor: 10.4.10-MariaDB
--- Versión de PHP: 7.3.12
+-- Tiempo de generación: 05-01-2020 a las 23:19:15
+-- Versión del servidor: 5.7.28-0ubuntu0.18.04.4
+-- Versión de PHP: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,54 +19,31 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `battleship`
+-- Base de datos: `adsi`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `armamento`
+-- Estructura de tabla para la tabla `Partida`
 --
 
-CREATE TABLE `armamento` (
-  `escudos` int(45) NOT NULL,
-  `misiles` int(45) NOT NULL,
-  `misilesBOOM` int(45) NOT NULL,
-  `misilesNS` int(45) NOT NULL,
-  `misilesEO` int(45) NOT NULL,
-  `emailUsuario` varchar(45) NOT NULL,
-  `precio` int(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuario`
---
-
-CREATE TABLE `usuario` (
-  `nombreUsuario` varchar(45) NOT NULL,
-  `contrasena` varchar(45) NOT NULL,
-  `esAdministrador` tinyint(1) NOT NULL,
-  `emailusuario` varchar(45) NOT NULL,
-  `puntos` int(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `Partida` (
+  `nombreUsuario` varchar(10) NOT NULL,
+  `nivel` int(10) NOT NULL,
+  `fechaHora` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `puntos` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `armamento`
+-- Indices de la tabla `Partida`
 --
-ALTER TABLE `armamento`
-  ADD PRIMARY KEY (`emailUsuario`);
-
---
--- Indices de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`emailusuario`);
+ALTER TABLE `Partida`
+  ADD PRIMARY KEY (`nombreUsuario`,`nivel`,`fechaHora`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
