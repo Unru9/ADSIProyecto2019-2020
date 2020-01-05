@@ -2,6 +2,9 @@ package packModelo;
 
 import java.util.Observable;
 
+import org.json.JSONObject;
+
+import packGestores.GRanking;
 import packModelo.packBarcos.Barco;
 import packModelo.packBarcos.BarcoNoEncException;
 import packModelo.packBarcos.BarcosFactory;
@@ -207,5 +210,21 @@ public class Battleship extends Observable {
 			setChanged();
 			notifyObservers(cambios);
 		} catch (BarcoNoEncException e) {}
+	}
+	
+	public JSONObject rankingUsuarioGeneral() {
+		return GRanking.getGRankoing().rankingUsuarioGeneral(usuario);
+	}
+	
+	public JSONObject rankingUsuarioPorNiv() {
+		return GRanking.getGRankoing().rankingUsuarioPorNiv(usuario);
+	}
+	
+	public JSONObject rankingGlobalGeneral() {
+		return GRanking.getGRankoing().rankingGlobalGeneral();
+	}
+	
+	public JSONObject rankingGlobalPorNiv() {
+		return GRanking.getGRankoing().rankingGlobalPorNiv();
 	}
 }

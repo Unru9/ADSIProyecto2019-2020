@@ -10,15 +10,11 @@ import packModelo.packCoordenada.Coordenada;
 
 public class Usuario extends Jugador {
 	
-
+	private String nombreUsuario;
 	private String email;
 	
 	public Usuario() {
 		super();
-	}
-	
-	public String getEmail() {
-		return email;
 	}
 
 	public void colocarBarco(Barco pBarco) {
@@ -138,4 +134,27 @@ public class Usuario extends Jugador {
 		}
 		super.getArmamento().rmvMisil();
 	}
+	
+	public String getNombreUsuario() {
+		return this.nombreUsuario;
+	}
+	
+	public int damePuntosPartidaAct() {
+		//TODO
+		return 0;
+	}
+	
+	public String getEmail() {
+		return this.email;
+	}
+	
+	public ListaLogros getListaLogros() {
+		//TODO
+		return null;
+	}
+	
+	private void crearGestorLogros() {
+		//TODO
+	}
+	
 }
