@@ -15,6 +15,10 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
 import packControlador.ContPantallaPrincipal.controladorPantPrincipal;
+import packModelo.Battleship;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class pantallaPrincipal extends JFrame {
 
@@ -62,6 +66,15 @@ public class pantallaPrincipal extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(pantallaPrincipal.class.getResource("/packImages/Battleship.jpeg")));
 		
 		JButton btnNuevaPartida = new JButton("Nueva Partida");
+		btnNuevaPartida.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Battleship.getBattleship().inicializar();
+				Inicio.getInicio().setVisible(true);
+				Inicio.getInicio().empezar();
+				dispose();
+			}
+		});
 		btnNuevaPartida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
