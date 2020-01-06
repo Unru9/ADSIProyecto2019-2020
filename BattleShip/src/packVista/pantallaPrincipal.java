@@ -85,6 +85,8 @@ public class pantallaPrincipal extends JFrame {
 		btnTienda.setActionCommand("tienda");
 		
 		JButton btnRanking = new JButton("Ranking");
+		btnRanking.addActionListener(new controladorPantPrincipal());
+		btnRanking.setActionCommand("ranking");
 		
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new controladorPantPrincipal());
