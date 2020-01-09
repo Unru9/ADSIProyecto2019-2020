@@ -153,7 +153,8 @@ public class menuTienda extends JFrame {
 		JButton btnAtras = new JButton("ATRAS");
 		btnAtras.addActionListener(new controladorTienda());
 		btnAtras.setActionCommand("atras");
-		
+				
+		actualizarDatos();
 		
 		for (int i = 0; i < pDatos.length(); i++) 
 		{

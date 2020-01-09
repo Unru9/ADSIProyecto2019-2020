@@ -19,8 +19,8 @@ public class controladorPantPrincipal implements ActionListener {
 		
 		if(action.equals("tienda")) {
 			try {
+				pantallaPrincipal.getMiPantallaPrincipal().dispose();
 				menuTienda.getMiMenuTienda().setVisible(true);
-				pantallaPrincipal.getMiPantallaPrincipal().setVisible(false);;
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

@@ -5,7 +5,7 @@ import org.json.JSONObject;
 import packModelo.packJugador.Usuario;
 
 public class GRanking {
-	
+	 
 	private static GRanking miGRanking;
 	
 	private GRanking() {

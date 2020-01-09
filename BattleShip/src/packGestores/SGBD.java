@@ -30,13 +30,14 @@ public class SGBD {
 		return mySGBD;
 	}
 	
-public void conectar() throws SQLException, ClassNotFoundException { 	
+
+	public void conectar() throws SQLException, ClassNotFoundException { 	
 		Class.forName("org.sqlite.JDBC");
 		myConn = DriverManager.getConnection("jdbc:sqlite:battleship.sqlite");
 
 		if(myConn.isClosed() == false)
 		{
-			System.out.println("Database connection successful!\n");
+			System.out.println("AQUI: Database connection successful!\n");
 			myStmt = myConn.createStatement();
 		}
 		else

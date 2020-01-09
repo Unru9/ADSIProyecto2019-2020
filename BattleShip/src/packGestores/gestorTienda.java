@@ -33,22 +33,21 @@ public class gestorTienda {
 	public JSONArray getPuntosUsuarioYStock() throws Exception {
 		
 		JSONArray datos = null;
-		GestorBD.getMiGestorBD().conectar();
+		SGBD.getSGBD().conectar();
 		//AQUI FALTA EL EMAIL XK NO ESTA IDENTIFICADO String email = getEmail();
-		ResultSet rs = GestorBD.getMiGestorBD().execSQLSelect("SELECT `puntos`, `misiles`, `escudos`, `misilesEO`, `misilesBOOM`, `misilesNS` FROM partida, armamento WHERE partida.nombreUsuario = armamento.armamentoUsuario AND partida.nombreUsuario = 'Lerulolu'");
+		ResultSet rs = SGBD.getSGBD().execSQLSelect("SELECT `puntos`, `misiles`, `escudos`, `misilesEO`, `misilesBOOM`, `misilesNS` FROM partida NATURAL JOIN armamento WHERE partida.nombreUsuario = armamento.nombreUsuario AND partida.nombreUsuario = 'Lerulolu'");
 		if(!rs.next()) {
+			System.out.println("ENTRA");
 			JOptionPane.showMessageDialog(null, "No tienes puntos acumulados", "Error", JOptionPane.ERROR_MESSAGE);
     		return null;
 		}
 		else {
 
 			datos = crearJSON(rs);
-			System.out.println("AQUI"+datos.length());
-    		
-        	GestorBD.getMiGestorBD().cerrarConexion();
- 
+    		 
         	return datos;
 		}
+		
 	}
 		
     //CREACION DEL JSON PARA ENVIAR LOS DATOS A LA INTERFAZ
@@ -80,9 +79,9 @@ public class gestorTienda {
 		
 		JSONArray datos = null;
 		int puntos = 0;
-		GestorBD.getMiGestorBD().conectar();
+		SGBD.getSGBD().conectar();
 		//AQUI FALTA EL EMAIL XK NO ESTA IDENTIFICADO String email = getEmail();
-		ResultSet rs = GestorBD.getMiGestorBD().execSQLSelect("SELECT puntos FROM partida WHERE nombreUsuario = 'Lerulolu'");
+		ResultSet rs = SGBD.getSGBD().execSQLSelect("SELECT puntos FROM partida WHERE nombreUsuario = 'Lerulolu'");
 		if(!rs.next()) {
 			JOptionPane.showMessageDialog(null, "No tienes puntos acumulados", "Error", JOptionPane.ERROR_MESSAGE);
     		return 0;
@@ -106,13 +105,13 @@ public class gestorTienda {
 
     public void comprarArma(String pArma) throws Exception {
     	
-    	GestorBD.getMiGestorBD().conectar();
+    	SGBD.getSGBD().conectar();
     	int puntos = getPuntosUsuario();
     	
     	if(pArma == "escudo") {
     		if(puntos >= 25) {
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET escudos = escudos + 1 WHERE armamentoUsuario = 'Lerulolu'");
-    			GestorBD.getMiGestorBD().execSQL("UPDATE partida SET puntos = puntos - 25 WHERE nombreUsuario = 'Lerulolu'");
+    			SGBD.getSGBD().execSQL("UPDATE armamento SET escudos = escudos + 1 WHERE nombreUsuario = 'Lerulolu'");
+    			SGBD.getSGBD().execSQL("UPDATE partida SET puntos = puntos - 25 WHERE nombreUsuario = 'Lerulolu'");
    
     		}
     		else {
@@ -121,24 +120,24 @@ public class gestorTienda {
     		}
     	}else if(pArma == "misil") {
     		if(puntos >= 10) {
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET misiles = misiles + 1 WHERE armamentoUsuario = 'Lerulolu'");
-    			GestorBD.getMiGestorBD().execSQL("UPDATE partida SET puntos = puntos - 10 WHERE nombreUsuario = 'Lerulolu'");
+    			SGBD.getSGBD().execSQL("UPDATE armamento SET misiles = misiles + 1 WHERE nombreUsuario = 'Lerulolu'");
+    			SGBD.getSGBD().execSQL("UPDATE partida SET puntos = puntos - 10 WHERE nombreUsuario = 'Lerulolu'");
     		}else {
     			ventanaErrorPuntosInsuficintes.getMiVentana().setVisible(true);
     			menuTienda.getMiMenuTienda().dispose();
     		}
     	}else if(pArma == "misilEO") {
     		if(puntos >= 45) {
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET misilesEO = misilesEO + 1 WHERE armamentoUsuario = 'Lerulolu'");
-    			GestorBD.getMiGestorBD().execSQL("UPDATE partida SET puntos = puntos - 45 WHERE nombreUsuario = 'Lerulolu'");
+    			SGBD.getSGBD().execSQL("UPDATE armamento SET misilesEO = misilesEO + 1 WHERE nombreUsuario = 'Lerulolu'");
+    			SGBD.getSGBD().execSQL("UPDATE partida SET puntos = puntos - 45 WHERE nombreUsuario = 'Lerulolu'");
     		}else {
     			ventanaErrorPuntosInsuficintes.getMiVentana().setVisible(true);
     			menuTienda.getMiMenuTienda().dispose();
     		}
     	}else if(pArma == "misilNS") {
     		if(puntos >= 45) {
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET misilesNS = misilesNS + 1 WHERE armamentoUsuario = 'Lerulolu'");
-    			GestorBD.getMiGestorBD().execSQL("UPDATE partida SET puntos = puntos - 45 WHERE nombreUsuario = 'Lerulolu'");
+    			SGBD.getSGBD().execSQL("UPDATE armamento SET misilesNS = misilesNS + 1 WHERE nombreUsuario = 'Lerulolu'");
+    			SGBD.getSGBD().execSQL("UPDATE partida SET puntos = puntos - 45 WHERE nombreUsuario = 'Lerulolu'");
     		}else {
     			ventanaErrorPuntosInsuficintes.getMiVentana().setVisible(true);
     			menuTienda.getMiMenuTienda().dispose();
@@ -146,14 +145,14 @@ public class gestorTienda {
  
     	}else if(pArma == "misilBOOM") {
     		if(puntos >= 90) {
-    			GestorBD.getMiGestorBD().execSQL("UPDATE armamento SET misilesBOOM = misilesBOOM + 1 WHERE armamentoUsuario = 'Lerulolu'");
-    			GestorBD.getMiGestorBD().execSQL("UPDATE partida SET puntos = puntos - 90 WHERE nombreUsuario = 'Lerulolu'");
+    			SGBD.getSGBD().execSQL("UPDATE armamento SET misilesBOOM = misilesBOOM + 1 WHERE nombreUsuario = 'Lerulolu'");
+    			SGBD.getSGBD().execSQL("UPDATE partida SET puntos = puntos - 90 WHERE nombreUsuario = 'Lerulolu'");
     		}else {
     			ventanaErrorPuntosInsuficintes.getMiVentana().setVisible(true);
     			menuTienda.getMiMenuTienda().dispose();
     		}
     	}
-    	GestorBD.getMiGestorBD().cerrarConexion();
+    	SGBD.getSGBD().cerrarConexion();
     	
     }
 }
