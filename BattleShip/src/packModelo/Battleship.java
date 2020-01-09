@@ -1,10 +1,14 @@
 package packModelo;
 
+import java.sql.SQLException;
 import java.util.Observable;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import packGestores.GCompartirResultadosRRSS;
 import packGestores.GRanking;
+import packGestores.GestorBD;
 import packModelo.packBarcos.Barco;
 import packModelo.packBarcos.BarcoNoEncException;
 import packModelo.packBarcos.BarcosFactory;
@@ -226,5 +230,22 @@ public class Battleship extends Observable {
 	
 	public JSONObject rankingGlobalPorNiv() {
 		return GRanking.getGRankoing().rankingGlobalPorNiv();
+	}
+	
+	public JSONObject  obtDatos() throws SQLException, JSONException{
+		JSONObject obj = new JSONObject();
+		GCompartirResultadosRRSS RRSS= GCompartirResultadosRRSS.getcompartirResultadosRRSS();
+		GestorBD BD = GestorBD.getMiGestorBD();
+		if( juegoFinalizado()){
+			//String nombreUsuario= this.usuario.getNombre();
+			int ptosPartida= this.usuario.getDinero();
+			obj.put("nombreUsuario", "UNAI");
+			obj.put("puntos",ptosPartida);
+			//ResultSet rt= BD.execSQLSelect("SELECT sum(puntos) FROM Partida WHERE nombreUsuario=UNAI");
+			obj.put("puntosTotales", 280);
+		}
+		
+		return obj;
+		
 	}
 }

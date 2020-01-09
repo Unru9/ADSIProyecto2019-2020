@@ -139,6 +139,10 @@ public class Usuario extends Jugador {
 		return this.nombreUsuario;
 	}
 	
+	public void setNombreUsuario(String pNombreUsuario){
+		this.nombreUsuario=pNombreUsuario;
+	}
+	
 	public int damePuntosPartidaAct() {
 		//TODO
 		return 0;
@@ -148,10 +152,10 @@ public class Usuario extends Jugador {
 		return this.email;
 	}
 	
-	public ListaLogros getListaLogros() {
+	/*public ListaLogros getListaLogros() {
 		//TODO
 		return null;
-	}
+	}*/
 	
 	private void crearGestorLogros() {
 		//TODO

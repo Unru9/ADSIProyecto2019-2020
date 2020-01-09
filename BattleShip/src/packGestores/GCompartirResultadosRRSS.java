@@ -20,7 +20,7 @@ public class GCompartirResultadosRRSS {
 
 
 	public void compartirTwitter(String nombreUsuario, int ptosPartida, int ptosTotales) throws IOException, URISyntaxException {
-		String TITULO = nombreUsuario+"%20BattleShip%3A%20PUNTOS%20PARTIDA%3D" + ptosPartida +".%20PUNTOS%20TOTALES%20OBTENIDOS%3D" + ptosTotales;
+		String TITULO = nombreUsuario+"--%20BattleShip2019-2020%3A%20PUNTOS%20PARTIDA%3D" + ptosPartida +".%20PUNTUACIÓN%20HISTÓRICA%3D" + ptosTotales;
 		URI myURI = new URI("http://twitter.com/share?text=" + TITULO + "&url=[URLcodificada]");
 		System.out.println(myURI);
 		Desktop.getDesktop().browse(myURI);
