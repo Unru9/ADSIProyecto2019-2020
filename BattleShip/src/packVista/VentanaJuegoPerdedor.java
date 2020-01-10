@@ -63,8 +63,8 @@ public class VentanaJuegoPerdedor extends JFrame {
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		//TÍTULO PRINCIPAL
-		JLabel título = new JLabel(" ¡INTÉNTALO OTRA VEZ, HAS PERDIDO ! ");
-		título.setBounds(190, 23, 250, 14);
+		JLabel titulo = new JLabel(" ¡INTÉNTALO OTRA VEZ, HAS PERDIDO ! ");
+		titulo.setBounds(190, 23, 250, 14);
 		
 		//COMPARTIR TWITTER
 		ImageIcon TwitterButtonIcon = new ImageIcon(VentanaJuegoPerdedor.class.getResource("/packImages/twitter.png"));
@@ -178,7 +178,7 @@ public class VentanaJuegoPerdedor extends JFrame {
 		contentPane.setLayout(null);
 		contentPane.setLayout(null);
 
-		getContentPane().add(título);
+		getContentPane().add(titulo);
 		getContentPane().add(TwitterButton);
 		getContentPane().add(WhatsAppButton);
 		getContentPane().add(RedditButton);
