@@ -337,7 +337,7 @@ public class menuTienda extends JFrame {
 		{
 			org.json.JSONObject one = pData.getJSONObject(i);
 			int puntos = one.getInt("puntos");
-			int escudos = one.getInt("escudos");
+			int escudos = one.optInt("escudos");
 			int misiles = one.getInt("misiles");
 			int misilesEO = one.getInt("misileseo");
 			int misilesNS = one.getInt("misilesns");
