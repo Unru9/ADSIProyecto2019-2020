@@ -35,7 +35,7 @@ public class gestorTienda {
 		JSONArray datos = null;
 		SGBD.getSGBD().conectar();
 		//AQUI FALTA EL EMAIL XK NO ESTA IDENTIFICADO String email = getEmail();
-		ResultSet rs = SGBD.getSGBD().execSQLSelect("SELECT `puntos`, `misiles`, `escudos`, `misilesEO`, `misilesBOOM`, `misilesNS` FROM partida NATURAL JOIN armamento WHERE partida.nombreUsuario = armamento.nombreUsuario AND partida.nombreUsuario = 'Lerulolu'");
+		ResultSet rs = SGBD.getSGBD().execSQLSelect("SELECT `puntos`, `cuantos`, `nombreArma` FROM partida NATURAL JOIN armamentoJugador WHERE nombreJugador = 'Lerulolu'");
 		if(!rs.next()) {
 			System.out.println("ENTRA");
 			JOptionPane.showMessageDialog(null, "No tienes puntos acumulados", "Error", JOptionPane.ERROR_MESSAGE);
