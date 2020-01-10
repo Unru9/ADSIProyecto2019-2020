@@ -3,6 +3,7 @@ package packModelo;
 import java.sql.SQLException;
 import java.util.Observable;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -216,7 +217,7 @@ public class Battleship extends Observable {
 		} catch (BarcoNoEncException e) {}
 	}
 	
-	public JSONObject rankingUsuarioGeneral() {
+	public JSONArray rankingUsuarioGeneral() {
 		return GRanking.getGRankoing().rankingUsuarioGeneral(usuario);
 	}
 	
