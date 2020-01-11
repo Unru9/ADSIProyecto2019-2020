@@ -7,13 +7,23 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import packModelo.Battleship;
+
 import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
 import javax.swing.JTable;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
 
 public class Ranking extends JFrame {
 
 	private JPanel contentPane;
+	private DefaultTableModel model;
 	private JTable table;
 
 	/**
@@ -41,32 +51,70 @@ public class Ranking extends JFrame {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		DefaultTableModel model = new DefaultTableModel();
-		model.addColumn("nombre");
-		table = new JTable(model);
-		contentPane.add(table, BorderLayout.CENTER);
-		System.out.println(string);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		JPanel bottom = new JPanel();
+		contentPane.add(bottom, BorderLayout.SOUTH);
+		
+		JButton btnOki = new JButton("OKI");
+		bottom.add(btnOki);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.CENTER);
+		
+		model = new DefaultTableModel();
+		
 		switch(string) {
 		case "PersonalGeneral":
-			cargarPersonaGlobal(model);
+			System.out.println("entra");
+			cargarPersonaGeneral();
 			break;
 		case "PersonalPor Niveles":
+			cargarPersonaPorNivel();
 			break;
 		case "GlobalGeneral":
+			cargarGlobalGeneral();
 			break;
 		case "GlobalPor Niveles":
+			cargarGlobalPorNivel();
 			break;
 		}
+		
+		table = new JTable(model);
+		scrollPane.setViewportView(table);
 			
 	}
 
-	private void cargarPersonaGlobal(DefaultTableModel model) {
+	private void cargarGlobalPorNivel() {
 		// TODO Auto-generated method stub
-		System.out.println("entra");
-		String[] headers= {"nombre", "puntos"};
-		String[][] data= {{"test","1"},{"test","2"}};
+		JSONObject json=Battleship.getBattleship().rankingGlobalPorNiv();
+	}
+
+	private void cargarGlobalGeneral() {
+		// TODO Auto-generated method stub
+		JSONObject json=Battleship.getBattleship().rankingGlobalGeneral();
+	}
+
+	private void cargarPersonaPorNivel() {
+		// TODO Auto-generated method stub
+		JSONObject json=Battleship.getBattleship().rankingUsuarioPorNiv();
+	}
+
+	private void cargarPersonaGeneral() {
+		// TODO Auto-generated method stub
+		JSONArray json=Battleship.getBattleship().rankingUsuarioGeneral();
+		model.addColumn("nombre");
+		model.addColumn("puntos");
+		for (int i = 0; i<=json.length();i++) {
+			try {
+				JSONObject jsonO = (JSONObject) json.get(i);
+				model.addRow(new Object[] {jsonO.get("nombre"),jsonO.getInt("puntos")});
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+		}
 		
 	}
 

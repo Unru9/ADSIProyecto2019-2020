@@ -63,8 +63,8 @@ public class VentanaJuegoPerdedor extends JFrame {
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		//TÍTULO PRINCIPAL
-		JLabel título = new JLabel(" ¡INTÉNTALO OTRA VEZ, HAS PERDIDO ! ");
-		título.setBounds(190, 23, 250, 14);
+		JLabel titulo = new JLabel(" ¡INTÉNTALO OTRA VEZ, HAS PERDIDO ! ");
+		titulo.setBounds(190, 23, 250, 14);
 		
 		//COMPARTIR TWITTER
 		ImageIcon TwitterButtonIcon = new ImageIcon(VentanaJuegoPerdedor.class.getResource("/packImages/twitter.png"));
@@ -81,7 +81,7 @@ public class VentanaJuegoPerdedor extends JFrame {
 				JSONObject res;
 				try {
 					res=BattleShip.obtDatos();
-					RRSS.compartirTwitter(res.getString("nombreUsuario"), res.getInt("puntos"),150);
+					RRSS.compartirTwitter(res.getString("nombreUsuario"), res.getInt("puntos"),3,150);
 				} catch (IOException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
@@ -116,7 +116,7 @@ public class VentanaJuegoPerdedor extends JFrame {
 				JSONObject res;
 				try {
 					res=BattleShip.obtDatos();
-					RRSS.compartirWhatsApp(res.getString("nombreUsuario"), res.getInt("puntos"));
+					RRSS.compartirWhatsApp(res.getString("nombreUsuario"), res.getInt("puntos"),3,150);
 				} catch (IOException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
@@ -155,7 +155,7 @@ public class VentanaJuegoPerdedor extends JFrame {
 				JSONObject res;
 				try {
 					res=BattleShip.obtDatos();
-					RRSS.compartirReddit(res.getString("nombreUsuario"), res.getInt("puntos"));
+					RRSS.compartirReddit(res.getString("nombreUsuario"), res.getInt("puntos"),3,150);
 				} catch (IOException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
@@ -178,7 +178,7 @@ public class VentanaJuegoPerdedor extends JFrame {
 		contentPane.setLayout(null);
 		contentPane.setLayout(null);
 
-		getContentPane().add(título);
+		getContentPane().add(titulo);
 		getContentPane().add(TwitterButton);
 		getContentPane().add(WhatsAppButton);
 		getContentPane().add(RedditButton);
