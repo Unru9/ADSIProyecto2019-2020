@@ -10,8 +10,8 @@ import packModelo.packCoordenada.Coordenada;
 
 public class Usuario extends Jugador {
 	
-	private String nombreUsuario;
-	private String email;
+	private String nombreUsuario= "Unai";
+	private String email = "ejemplo@hotmail.com";;
 	
 	public Usuario() {
 		super();
