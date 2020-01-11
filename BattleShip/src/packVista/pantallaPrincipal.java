@@ -10,11 +10,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
 import packControlador.ContPantallaPrincipal.controladorPantPrincipal;
+import packGestores.GestorNivel;
 import packModelo.Battleship;
 
 import java.awt.event.MouseAdapter;
@@ -57,7 +59,7 @@ public class pantallaPrincipal extends JFrame {
 	private pantallaPrincipal() {
 		setTitle("Menu Inicial");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 610, 660);
+		setBounds(380, 40, 610, 660);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -70,6 +72,10 @@ public class pantallaPrincipal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				Battleship.getBattleship().inicializar();
+				String[] options = {"F\u00e1cil", "Normal", "Dif\u00edcil"};
+				int option = JOptionPane.showOptionDialog(contentPane, "Elija la opci\u00f3n deseada:", "Nivel de dificultad", JOptionPane.DEFAULT_OPTION,
+						JOptionPane.QUESTION_MESSAGE, new ImageIcon(), options, options[0]);
+				GestorNivel.getGestorNivel().modificarDatosNivel(option);
 				Inicio.getInicio().setVisible(true);
 				Inicio.getInicio().empezar();
 				dispose();
