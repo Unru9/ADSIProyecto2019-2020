@@ -52,16 +52,16 @@ public class CompartirResultadosTest {
 			rt.close();
 			
 			//PUNTOS HISTÓRICOS
-			SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario, nivel,puntos) VALUES ('test', 1, 150);");
-			SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario, nivel,puntos) VALUES ('test', 1, 125);");
-			ResultSet rt1= SGBD.getSGBD().execSQLSelect("SELECT SUM (puntos) as sumPuntos FROM Partida WHERE nombreUsuario='test'");
+			SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario,nivel,puntos) VALUES('test',1,100);");
+			SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario,nivel,puntos) VALUES('test',1,150);");
+			ResultSet rt1= SGBD.getSGBD().execSQLSelect("SELECT SUM(puntos) as sumPuntos FROM Partida where nombreUsuario='test'");
 			while(rt1.next()){
 				puntosHistoricos= rt1.getInt("sumPuntos");
-				assertEquals(puntosHistoricos,275);
+				assertEquals(puntosHistoricos,250);
 				//System.out.println("PUNTOS BD "+ puntosHistoricos);
 				
 			}
-			rt.close();
+			rt1.close();
 			GCompartirResultadosRRSS.getcompartirResultadosRRSS().compartirTwitter(u.getNombreUsuario(), u.getDinero(),numPremios,puntosHistoricos);
 			GCompartirResultadosRRSS.getcompartirResultadosRRSS().compartirWhatsApp(u.getNombreUsuario(), u.getDinero(),numPremios,puntosHistoricos);
 			GCompartirResultadosRRSS.getcompartirResultadosRRSS().compartirReddit(u.getNombreUsuario(), u.getDinero(),numPremios,puntosHistoricos);
