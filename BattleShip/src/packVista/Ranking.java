@@ -2,6 +2,8 @@ package packVista;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -57,8 +59,16 @@ public class Ranking extends JFrame {
 		JPanel bottom = new JPanel();
 		contentPane.add(bottom, BorderLayout.SOUTH);
 		
-		JButton btnOki = new JButton("OKI");
-		bottom.add(btnOki);
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				dispose();
+			}
+		});
+		bottom.add(btnAceptar);
+		
 		
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);

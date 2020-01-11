@@ -2,6 +2,7 @@ package packMain;
 
 import java.sql.SQLException;
 
+import packVista.Inicio;
 import packVista.pantallaPrincipal;
 
 public class Main {
