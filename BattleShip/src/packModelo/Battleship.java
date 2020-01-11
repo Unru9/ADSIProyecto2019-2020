@@ -1,15 +1,18 @@
 package packModelo;
 
+import static org.junit.Assert.assertEquals;
+
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Observable;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import packGestores.GCompartirResultadosRRSS;
 import packGestores.GRanking;
 import packGestores.GestorBD;
+import packGestores.SGBD;
 import packModelo.packBarcos.Barco;
 import packModelo.packBarcos.BarcoNoEncException;
 import packModelo.packBarcos.BarcosFactory;
@@ -217,7 +220,7 @@ public class Battleship extends Observable {
 		} catch (BarcoNoEncException e) {}
 	}
 	
-	public JSONArray rankingUsuarioGeneral() {
+	public JSONObject rankingUsuarioGeneral() {
 		return GRanking.getGRankoing().rankingUsuarioGeneral(usuario);
 	}
 	
@@ -237,13 +240,31 @@ public class Battleship extends Observable {
 		JSONObject obj = new JSONObject();
 		GCompartirResultadosRRSS RRSS= GCompartirResultadosRRSS.getcompartirResultadosRRSS();
 		GestorBD BD = GestorBD.getMiGestorBD();
+		int puntosHistoricos=0;
+		int numPremios=0;
+		
 		if( juegoFinalizado()){
-			//String nombreUsuario= this.usuario.getNombre();
+			String nombreUsuario= this.usuario.getNombreUsuario();
 			int ptosPartida= this.usuario.getDinero();
-			obj.put("nombreUsuario", "UNAI");
+			obj.put("nombreUsuario", nombreUsuario);
 			obj.put("puntos",ptosPartida);
-			//ResultSet rt= BD.execSQLSelect("SELECT sum(puntos) FROM Partida WHERE nombreUsuario=UNAI");
-			obj.put("puntosTotales", 280);
+			
+			// OBT NUM PREMIOS
+			ResultSet rt= SGBD.getSGBD().execSQLSelect("SELECT premio FROM Logro INNER JOIN LogrosJugador WHERE LogrosJugador.nombreUsuario=%nombreUsuario% AND Logro.completado='true'");
+			while(rt.next()){
+				numPremios= rt.getInt("premio");
+				
+			}
+			rt.close();
+			obj.put("numPremios", numPremios);
+			
+			//OBT PUNTOS HISTÓRICOS
+			ResultSet rt1= SGBD.getSGBD().execSQLSelect("SELECT SUM(puntos) as sumPuntos FROM Partida where nombreUsuario=%nombreUsuario%");
+			while(rt1.next()){
+				puntosHistoricos= rt1.getInt("sumPuntos");
+			}
+			rt1.close();
+			obj.put("puntosHistóricos", puntosHistoricos);
 		}
 		
 		return obj;
