@@ -47,7 +47,6 @@ public class menuTienda extends JFrame {
 	
 	private menuTienda() throws Exception {
 		
-		JSONArray pDatos = gestorTienda.getMiGestorTeinda().getPuntosUsuarioYStock();
 		setTitle("Tienda");
 		setBounds(100, 100, 550, 500);
 		contentPane = new JPanel();
