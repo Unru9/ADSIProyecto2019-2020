@@ -38,7 +38,7 @@ public class RankingTest {
 	public void testUnResultado() {
 		try {
 			SGBD.getSGBD().execSQL("INSERT INTO Usuario(nombreUsuario) VALUES('test');");
-			SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario, nivel,puntos) VALUES ('test', 1, 100);");
+			SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario, nivel,puntos) VALUES ('test', 'facil', 100);");
 			ResultSet rs = SGBD.getSGBD().execSQLSelect("SELECT nombreUsuario,puntos FROM Partida WHERE nombreUsuario='test';");
 			rs.next();
 			String nameTest = rs.getString("nombreUsuario");
@@ -96,7 +96,7 @@ public class RankingTest {
 			vistaRanking = new Ranking("GlobalPor Niveles");
 			vistaRanking.setVisible(true);
 			Thread.sleep(2000);
-			
+			vistaRanking.dispose();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -113,7 +113,7 @@ public class RankingTest {
 		Ranking vistaRanking = new Ranking("PersonalGeneral");
 		vistaRanking.setVisible(true);
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -131,7 +131,7 @@ public class RankingTest {
 		Ranking vistaRanking = new Ranking("PersonalPor Niveles");
 		vistaRanking.setVisible(true);
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -149,7 +149,7 @@ public class RankingTest {
 		Ranking vistaRanking = new Ranking("GlobalGeneral");
 		vistaRanking.setVisible(true);
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -167,7 +167,7 @@ public class RankingTest {
 		Ranking vistaRanking = new Ranking("GlobalPor Niveles");
 		vistaRanking.setVisible(true);
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
