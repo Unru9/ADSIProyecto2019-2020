@@ -1,11 +1,14 @@
 package packGestores;
 
+import java.sql.Array;
 import java.sql.ResultSet;
 
 import javax.swing.JOptionPane;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.mysql.cj.xdevapi.JsonArray;
 
 import packVista.menuTienda;
 import packVista.ventanaErrorPuntosInsuficintes;
@@ -35,16 +38,15 @@ public class gestorTienda {
 		JSONArray datos = null;
 		SGBD.getSGBD().conectar();
 		//AQUI FALTA EL EMAIL XK NO ESTA IDENTIFICADO String email = getEmail();
-		ResultSet rs = SGBD.getSGBD().execSQLSelect("SELECT `puntos`, `misiles`, `escudos`, `misilesEO`, `misilesBOOM`, `misilesNS` FROM partida NATURAL JOIN armamento WHERE partida.nombreUsuario = armamento.nombreUsuario AND partida.nombreUsuario = 'Lerulolu'");
+		ResultSet rs = SGBD.getSGBD().execSQLSelect("SELECT `puntos`, `cuantos`, `nombreArma` FROM partida NATURAL JOIN armamentoJugador WHERE nombreJugador = 'Lerulolu'");
 		if(!rs.next()) {
-			System.out.println("ENTRA");
 			JOptionPane.showMessageDialog(null, "No tienes puntos acumulados", "Error", JOptionPane.ERROR_MESSAGE);
     		return null;
 		}
 		else {
-
+			
 			datos = crearJSON(rs);
-    		 
+    		
         	return datos;
 		}
 		
@@ -62,7 +64,6 @@ public class gestorTienda {
 		}
     	
     	jsonArray.put(objFirst);
-    	
     	while (resultSet.next()) {
     		
     		JSONObject obj = new JSONObject();
@@ -110,7 +111,7 @@ public class gestorTienda {
     	
     	if(pArma == "escudo") {
     		if(puntos >= 25) {
-    			SGBD.getSGBD().execSQL("UPDATE armamento SET escudos = escudos + 1 WHERE nombreUsuario = 'Lerulolu'");
+    			SGBD.getSGBD().execSQL("UPDATE armamentoJugador SET cuantos = cuantos + 1 WHERE nombreJugador = 'Lerulolu' AND nombreArma = 'escudos'");
     			SGBD.getSGBD().execSQL("UPDATE partida SET puntos = puntos - 25 WHERE nombreUsuario = 'Lerulolu'");
    
     		}
@@ -120,7 +121,7 @@ public class gestorTienda {
     		}
     	}else if(pArma == "misil") {
     		if(puntos >= 10) {
-    			SGBD.getSGBD().execSQL("UPDATE armamento SET misiles = misiles + 1 WHERE nombreUsuario = 'Lerulolu'");
+    			SGBD.getSGBD().execSQL("UPDATE armamentoJugador SET cuantos = cuantos + 1 WHERE nombreJugador = 'Lerulolu' AND nombreArma = 'misiles'");
     			SGBD.getSGBD().execSQL("UPDATE partida SET puntos = puntos - 10 WHERE nombreUsuario = 'Lerulolu'");
     		}else {
     			ventanaErrorPuntosInsuficintes.getMiVentana().setVisible(true);
@@ -128,7 +129,7 @@ public class gestorTienda {
     		}
     	}else if(pArma == "misilEO") {
     		if(puntos >= 45) {
-    			SGBD.getSGBD().execSQL("UPDATE armamento SET misilesEO = misilesEO + 1 WHERE nombreUsuario = 'Lerulolu'");
+    			SGBD.getSGBD().execSQL("UPDATE armamentoJugador SET cuantos = cuantos + 1 WHERE nombreJugador = 'Lerulolu' AND nombreArma = 'misilesEO'");
     			SGBD.getSGBD().execSQL("UPDATE partida SET puntos = puntos - 45 WHERE nombreUsuario = 'Lerulolu'");
     		}else {
     			ventanaErrorPuntosInsuficintes.getMiVentana().setVisible(true);
@@ -136,7 +137,7 @@ public class gestorTienda {
     		}
     	}else if(pArma == "misilNS") {
     		if(puntos >= 45) {
-    			SGBD.getSGBD().execSQL("UPDATE armamento SET misilesNS = misilesNS + 1 WHERE nombreUsuario = 'Lerulolu'");
+    			SGBD.getSGBD().execSQL("UPDATE armamentoJugador SET cuantos = cuantos + 1 WHERE nombreJugador = 'Lerulolu' AND nombreArma = 'misilesNS'");
     			SGBD.getSGBD().execSQL("UPDATE partida SET puntos = puntos - 45 WHERE nombreUsuario = 'Lerulolu'");
     		}else {
     			ventanaErrorPuntosInsuficintes.getMiVentana().setVisible(true);
@@ -145,7 +146,7 @@ public class gestorTienda {
  
     	}else if(pArma == "misilBOOM") {
     		if(puntos >= 90) {
-    			SGBD.getSGBD().execSQL("UPDATE armamento SET misilesBOOM = misilesBOOM + 1 WHERE nombreUsuario = 'Lerulolu'");
+    			SGBD.getSGBD().execSQL("UPDATE armamentoJugador SET cuantos = cuantos + 1 WHERE nombreJugador = 'Lerulolu' AND nombreArma = 'misilesBOOM'");
     			SGBD.getSGBD().execSQL("UPDATE partida SET puntos = puntos - 90 WHERE nombreUsuario = 'Lerulolu'");
     		}else {
     			ventanaErrorPuntosInsuficintes.getMiVentana().setVisible(true);

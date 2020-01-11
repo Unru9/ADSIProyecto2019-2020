@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import packControlador.ContTienda.controladorTienda;
 import packGestores.gestorTienda;
@@ -46,7 +47,6 @@ public class menuTienda extends JFrame {
 	
 	private menuTienda() throws Exception {
 		
-		JSONArray pDatos = gestorTienda.getMiGestorTeinda().getPuntosUsuarioYStock();
 		setTitle("Tienda");
 		setBounds(100, 100, 550, 500);
 		contentPane = new JPanel();
@@ -153,28 +153,34 @@ public class menuTienda extends JFrame {
 		JButton btnAtras = new JButton("ATRAS");
 		btnAtras.addActionListener(new controladorTienda());
 		btnAtras.setActionCommand("atras");
-				
-		actualizarDatos();
-		
-		for (int i = 0; i < pDatos.length(); i++) 
-		{
-			org.json.JSONObject one = pDatos.getJSONObject(i);
-			int puntos = one.getInt("puntos");
-			int escudos = one.getInt("escudos");
-			int misiles = one.getInt("misiles");
-			int misilesEO = one.getInt("misileseo");
-			int misilesNS = one.getInt("misilesns");
-			int misilesBOOM = one.getInt("misilesboom");
+						
+		JSONArray pData = gestorTienda.getMiGestorTeinda().getPuntosUsuarioYStock();
+
+		for(int i = 0; i < pData.length(); i++) {
 			
-			puntosJug.setText(""+puntos);
-			escudo.setText(""+escudos);
-			misil.setText(""+misiles);
-			misilEO.setText(""+misilesEO);
-			misilNS.setText(""+misilesNS);
-			misilBOOM.setText(""+misilesBOOM);
-			
+			JSONObject dato = pData.getJSONObject(i);
+			if(i == 0) {
+				int escudos = dato.getInt("cuantos");
+				escudo.setText(""+escudos);
+			}
+			else if(i == 1) {
+				int misiles = dato.getInt("cuantos");
+				misil.setText(""+misiles);
+			}
+			else if(i == 2) {
+				int misilesEO = dato.getInt("cuantos");
+				misilEO.setText(""+misilesEO);
+			}
+			else if(i == 3){
+				int misilesNS = dato.getInt("cuantos");
+				misilNS.setText(""+misilesNS);
+			}else {
+				int misilesBOOM = dato.getInt("cuantos");
+				misilBOOM.setText(""+misilesBOOM);
+			}
+			int puntosJ = dato.getInt("puntos");
+			puntosJug.setText(""+puntosJ);
 		}
-		
 		
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -333,23 +339,29 @@ public class menuTienda extends JFrame {
 		
 		JSONArray pData = gestorTienda.getMiGestorTeinda().getPuntosUsuarioYStock();
 		
-		for (int i = 0; i < pData.length(); i++) 
-		{
-			org.json.JSONObject one = pData.getJSONObject(i);
-			int puntos = one.getInt("puntos");
-			int escudos = one.getInt("escudos");
-			int misiles = one.getInt("misiles");
-			int misilesEO = one.getInt("misileseo");
-			int misilesNS = one.getInt("misilesns");
-			int misilesBOOM = one.getInt("misilesboom");
-			
-			puntosJug.setText(""+puntos);
-			escudo.setText(""+escudos);
-			misil.setText(""+misiles);
-			misilEO.setText(""+misilesEO);
-			misilNS.setText(""+misilesNS);
-			misilBOOM.setText(""+misilesBOOM);
-			
+		for(int i = 0; i < pData.length(); i++) {
+			JSONObject dato = pData.getJSONObject(i);
+			if(i == 0) {
+				int escudos = dato.getInt("cuantos");
+				escudo.setText(""+escudos);
+			}
+			else if(i == 1) {
+				int misiles = dato.getInt("cuantos");
+				misil.setText(""+misiles);
+			}
+			else if(i == 2) {
+				int misilesEO = dato.getInt("cuantos");
+				misilEO.setText(""+misilesEO);
+			}
+			else if(i == 3){
+				int misilesNS = dato.getInt("cuantos");
+				misilNS.setText(""+misilesNS);
+			}else {
+				int misilesBOOM = dato.getInt("cuantos");
+				misilBOOM.setText(""+misilesBOOM);
+			}
+			int puntosJ = dato.getInt("puntos");
+			puntosJug.setText(""+puntosJ);
 		}
 	}
 }

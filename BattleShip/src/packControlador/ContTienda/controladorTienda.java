@@ -27,6 +27,7 @@ public class controladorTienda implements ActionListener {
 		}else if(action.equals("escudo")) {
 			try {
 				gestorTienda.getMiGestorTeinda().comprarArma("escudo");
+				menuTienda.getMiMenuTienda().actualizarDatos();
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -34,6 +35,7 @@ public class controladorTienda implements ActionListener {
 		}else if(action.equals("misil")) {
 			try {
 				gestorTienda.getMiGestorTeinda().comprarArma("misil");
+				menuTienda.getMiMenuTienda().actualizarDatos();
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -41,6 +43,7 @@ public class controladorTienda implements ActionListener {
 		}else if(action.equals("misilEO")) {
 			try {
 				gestorTienda.getMiGestorTeinda().comprarArma("misilEO");
+				menuTienda.getMiMenuTienda().actualizarDatos();
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -48,6 +51,7 @@ public class controladorTienda implements ActionListener {
 		}else if(action.equals("misilNS")) {
 			try {
 				gestorTienda.getMiGestorTeinda().comprarArma("misilNS");
+				menuTienda.getMiMenuTienda().actualizarDatos();
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -56,6 +60,7 @@ public class controladorTienda implements ActionListener {
 		}else if(action.equals("misilBOOM")) {
 			try {
 				gestorTienda.getMiGestorTeinda().comprarArma("misilBOOM");
+				menuTienda.getMiMenuTienda().actualizarDatos();
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
