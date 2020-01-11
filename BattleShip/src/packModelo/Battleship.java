@@ -237,8 +237,7 @@ public class Battleship extends Observable {
 	}
 	
 	public JSONObject  obtDatos() throws SQLException, JSONException{
-		JSONObject obj = new JSONObject();
-		GCompartirResultadosRRSS RRSS= GCompartirResultadosRRSS.getcompartirResultadosRRSS();
+		JSONObject obj = new JSONObject();;
 		GestorBD BD = GestorBD.getMiGestorBD();
 		int puntosHistoricos=0;
 		int numPremios=0;
@@ -250,19 +249,17 @@ public class Battleship extends Observable {
 			obj.put("puntos",ptosPartida);
 			
 			// OBT NUM PREMIOS
-			ResultSet rt= SGBD.getSGBD().execSQLSelect("SELECT premio FROM Logro INNER JOIN LogrosJugador WHERE LogrosJugador.nombreUsuario=%nombreUsuario% AND Logro.completado='true'");
-			while(rt.next()){
+			ResultSet rt= BD.execSQLSelect("SELECT premio FROM Logro INNER JOIN LogrosJugador WHERE LogrosJugador.nombreUsuario=%nombreUsuario% AND Logro.completado='true'");
+			rt.next();
 				numPremios= rt.getInt("premio");
 				
-			}
 			rt.close();
 			obj.put("numPremios", numPremios);
 			
 			//OBT PUNTOS HISTÓRICOS
-			ResultSet rt1= SGBD.getSGBD().execSQLSelect("SELECT SUM(puntos) as sumPuntos FROM Partida where nombreUsuario=%nombreUsuario%");
-			while(rt1.next()){
+			ResultSet rt1= BD.execSQLSelect("SELECT SUM(puntos) as sumPuntos FROM Partida where nombreUsuario=%nombreUsuario%");
+			rt1.next();
 				puntosHistoricos= rt1.getInt("sumPuntos");
-			}
 			rt1.close();
 			obj.put("puntosHistóricos", puntosHistoricos);
 		}
