@@ -76,7 +76,6 @@ public class GRanking {
 		JSONArray partidas = new JSONArray();
 		try {
 			ResultSet sql = SGBD.getSGBD().execSQLSelect(statement);
-			sql.next();
 			while(sql.next()) {
 				JSONObject partida=new JSONObject();
 				partida.put("nombre", sql.getString("nombreUsuario"));

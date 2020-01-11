@@ -67,17 +67,20 @@ public class Ranking extends JFrame {
 		
 		switch(string) {
 		case "PersonalGeneral":
-			System.out.println("entra");
+			System.out.println("entra PersonalGeneral");
 			cargarPersonaGeneral();
 			break;
 		case "PersonalPor Niveles":
+			System.out.println("entra PersonalPor Niveles");
 			cargarPersonaPorNivel();
 			break;
 		case "GlobalGeneral":
 			cargarGlobalGeneral();
+			System.out.println("entra GlobalGeneral");
 			break;
 		case "GlobalPor Niveles":
 			cargarGlobalPorNivel();
+			System.out.println("entra GlobalPor Niveles");
 			break;
 		}
 		
@@ -98,21 +101,26 @@ public class Ranking extends JFrame {
 		int facil=0;
 		int normal=0;
 		int dificil=0;
-		for (int i = 0; i<=json.length();i++) {
+		int row=-1;
+		for (int i = 0; i<json.length();i++) {
 			try {
 				JSONObject jsonO = (JSONObject) json.get(i);
 				String nivel = jsonO.getString("nivel");
+				if(row<facil || row<normal || row<dificil) {
+					model.addRow(new Object[] {});
+					row++;
+				}
 				if(nivel.equals("facil")) {
-					model.setValueAt(jsonO.getString("nombre"), facil, 5);
-					model.setValueAt(jsonO.getString("puntos"), facil, 5);
+					model.setValueAt(jsonO.getString("nombre"), facil, 0);
+					model.setValueAt(jsonO.getInt("puntos"), facil, 1);
 					facil++;
 				}else if(nivel.equals("normal")) {
-					model.setValueAt(jsonO.getString("nombre"), normal, 5);
-					model.setValueAt(jsonO.getString("puntos"), normal, 5);
+					model.setValueAt(jsonO.getString("nombre"), normal, 2);
+					model.setValueAt(jsonO.getInt("puntos"), normal, 3);
 					normal++;
 				}else if(nivel.equals("dificil")) {
-					model.setValueAt(jsonO.getString("nombre"), dificil, 5);
-					model.setValueAt(jsonO.getString("puntos"), dificil, 5);
+					model.setValueAt(jsonO.getString("nombre"), dificil, 4);
+					model.setValueAt(jsonO.getInt("puntos"), dificil, 5);
 					dificil++;
 				}
 			} catch (JSONException e) {
@@ -127,7 +135,7 @@ public class Ranking extends JFrame {
 		JSONArray json=Battleship.getBattleship().rankingGlobalGeneral();
 		model.addColumn("nombre");
 		model.addColumn("puntos");
-		for (int i = 0; i<=json.length();i++) {
+		for (int i = 0; i<json.length();i++) {
 			try {
 				JSONObject jsonO = (JSONObject) json.get(i);
 				model.addRow(new Object[] {jsonO.get("nombre"),jsonO.getInt("puntos")});
@@ -150,21 +158,26 @@ public class Ranking extends JFrame {
 		int facil=0;
 		int normal=0;
 		int dificil=0;
-		for (int i = 0; i<=json.length();i++) {
+		int row=-1;
+		for (int i = 0; i<json.length();i++) {
 			try {
 				JSONObject jsonO = (JSONObject) json.get(i);
 				String nivel = jsonO.getString("nivel");
+				if(row<facil || row<normal || row<dificil) {
+					model.addRow(new Object[] {});
+					row++;
+				}
 				if(nivel.equals("facil")) {
-					model.setValueAt(jsonO.getString("nombre"), facil, 5);
-					model.setValueAt(jsonO.getString("puntos"), facil, 5);
+					model.setValueAt(jsonO.getString("nombre"), facil, 0);
+					model.setValueAt(jsonO.getInt("puntos"), facil, 1);
 					facil++;
 				}else if(nivel.equals("normal")) {
-					model.setValueAt(jsonO.getString("nombre"), normal, 5);
-					model.setValueAt(jsonO.getString("puntos"), normal, 5);
+					model.setValueAt(jsonO.getString("nombre"), normal, 2);
+					model.setValueAt(jsonO.getInt("puntos"), normal, 3);
 					normal++;
 				}else if(nivel.equals("dificil")) {
-					model.setValueAt(jsonO.getString("nombre"), dificil, 5);
-					model.setValueAt(jsonO.getString("puntos"), dificil, 5);
+					model.setValueAt(jsonO.getString("nombre"), dificil, 4);
+					model.setValueAt(jsonO.getInt("puntos"), dificil, 5);
 					dificil++;
 				}
 			} catch (JSONException e) {
