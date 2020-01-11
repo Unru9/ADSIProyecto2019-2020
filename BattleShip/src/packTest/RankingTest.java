@@ -10,6 +10,8 @@ import org.junit.Test;
 import packGestores.GestorBD;
 import packGestores.SGBD;
 import packModelo.Battleship;
+import packModelo.packJugador.Usuario;
+import packVista.Ranking;
 
 public class RankingTest {
 	
@@ -69,7 +71,17 @@ public class RankingTest {
 	@Test
 	public void testVentanaRanking() {
 		insert2Table();
-		Battleship.getBattleship().getUsuario().setNombreUsuario("test");
+		Usuario test=new Usuario();
+		test.setNombreUsuario("test");
+		Battleship.getBattleship().setUsuario(test);
+		Ranking vistaRanking = new Ranking("PersonalGeneral");
+		vistaRanking.setVisible(true);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		clean();
 	}
 	

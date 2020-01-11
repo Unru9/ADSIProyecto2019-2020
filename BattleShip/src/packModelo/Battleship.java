@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Observable;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -220,19 +221,19 @@ public class Battleship extends Observable {
 		} catch (BarcoNoEncException e) {}
 	}
 	
-	public JSONObject rankingUsuarioGeneral() {
+	public JSONArray rankingUsuarioGeneral() {
 		return GRanking.getGRankoing().rankingUsuarioGeneral(usuario);
 	}
 	
-	public JSONObject rankingUsuarioPorNiv() {
+	public JSONArray rankingUsuarioPorNiv() {
 		return GRanking.getGRankoing().rankingUsuarioPorNiv(usuario);
 	}
 	
-	public JSONObject rankingGlobalGeneral() {
+	public JSONArray rankingGlobalGeneral() {
 		return GRanking.getGRankoing().rankingGlobalGeneral();
 	}
 	
-	public JSONObject rankingGlobalPorNiv() {
+	public JSONArray rankingGlobalPorNiv() {
 		return GRanking.getGRankoing().rankingGlobalPorNiv();
 	}
 	
@@ -256,15 +257,19 @@ public class Battleship extends Observable {
 			rt.close();
 			obj.put("numPremios", numPremios);
 			
-			//OBT PUNTOS HISTÓRICOS
+			//OBT PUNTOS HISTï¿½RICOS
 			ResultSet rt1= BD.execSQLSelect("SELECT SUM(puntos) as sumPuntos FROM Partida where nombreUsuario=%nombreUsuario%");
 			rt1.next();
 				puntosHistoricos= rt1.getInt("sumPuntos");
 			rt1.close();
-			obj.put("puntosHistóricos", puntosHistoricos);
+			obj.put("puntosHistï¿½ricos", puntosHistoricos);
 		}
 		
 		return obj;
 		
+	}
+	
+	public void setUsuario(Usuario pUsuario) {
+		this.usuario=pUsuario;
 	}
 }

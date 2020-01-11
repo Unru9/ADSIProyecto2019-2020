@@ -88,17 +88,90 @@ public class Ranking extends JFrame {
 
 	private void cargarGlobalPorNivel() {
 		// TODO Auto-generated method stub
-		JSONObject json=Battleship.getBattleship().rankingGlobalPorNiv();
+		JSONArray json=Battleship.getBattleship().rankingGlobalPorNiv();
+		model.addColumn("nombre");
+		model.addColumn("puntos facil");
+		model.addColumn("nombre");
+		model.addColumn("puntos normal");
+		model.addColumn("nombre");
+		model.addColumn("puntos dificil");
+		int facil=0;
+		int normal=0;
+		int dificil=0;
+		for (int i = 0; i<=json.length();i++) {
+			try {
+				JSONObject jsonO = (JSONObject) json.get(i);
+				String nivel = jsonO.getString("nivel");
+				if(nivel.equals("facil")) {
+					model.setValueAt(jsonO.getString("nombre"), facil, 5);
+					model.setValueAt(jsonO.getString("puntos"), facil, 5);
+					facil++;
+				}else if(nivel.equals("normal")) {
+					model.setValueAt(jsonO.getString("nombre"), normal, 5);
+					model.setValueAt(jsonO.getString("puntos"), normal, 5);
+					normal++;
+				}else if(nivel.equals("dificil")) {
+					model.setValueAt(jsonO.getString("nombre"), dificil, 5);
+					model.setValueAt(jsonO.getString("puntos"), dificil, 5);
+					dificil++;
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+		}
 	}
 
 	private void cargarGlobalGeneral() {
 		// TODO Auto-generated method stub
-		JSONObject json=Battleship.getBattleship().rankingGlobalGeneral();
+		JSONArray json=Battleship.getBattleship().rankingGlobalGeneral();
+		model.addColumn("nombre");
+		model.addColumn("puntos");
+		for (int i = 0; i<=json.length();i++) {
+			try {
+				JSONObject jsonO = (JSONObject) json.get(i);
+				model.addRow(new Object[] {jsonO.get("nombre"),jsonO.getInt("puntos")});
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+		}
 	}
 
 	private void cargarPersonaPorNivel() {
 		// TODO Auto-generated method stub
-		JSONObject json=Battleship.getBattleship().rankingUsuarioPorNiv();
+		JSONArray json=Battleship.getBattleship().rankingUsuarioPorNiv();
+		model.addColumn("nombre");
+		model.addColumn("puntos facil");
+		model.addColumn("nombre");
+		model.addColumn("puntos normal");
+		model.addColumn("nombre");
+		model.addColumn("puntos dificil");
+		int facil=0;
+		int normal=0;
+		int dificil=0;
+		for (int i = 0; i<=json.length();i++) {
+			try {
+				JSONObject jsonO = (JSONObject) json.get(i);
+				String nivel = jsonO.getString("nivel");
+				if(nivel.equals("facil")) {
+					model.setValueAt(jsonO.getString("nombre"), facil, 5);
+					model.setValueAt(jsonO.getString("puntos"), facil, 5);
+					facil++;
+				}else if(nivel.equals("normal")) {
+					model.setValueAt(jsonO.getString("nombre"), normal, 5);
+					model.setValueAt(jsonO.getString("puntos"), normal, 5);
+					normal++;
+				}else if(nivel.equals("dificil")) {
+					model.setValueAt(jsonO.getString("nombre"), dificil, 5);
+					model.setValueAt(jsonO.getString("puntos"), dificil, 5);
+					dificil++;
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+		}
 	}
 
 	private void cargarPersonaGeneral() {
@@ -106,7 +179,7 @@ public class Ranking extends JFrame {
 		JSONArray json=Battleship.getBattleship().rankingUsuarioGeneral();
 		model.addColumn("nombre");
 		model.addColumn("puntos");
-		for (int i = 0; i<=json.length();i++) {
+		for (int i = 0; i<json.length();i++) {
 			try {
 				JSONObject jsonO = (JSONObject) json.get(i);
 				model.addRow(new Object[] {jsonO.get("nombre"),jsonO.getInt("puntos")});
