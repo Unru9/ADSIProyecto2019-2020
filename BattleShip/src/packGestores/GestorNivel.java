@@ -18,14 +18,6 @@ public class GestorNivel {
 			miGestorNivel = new GestorNivel();
 		return miGestorNivel;
 	}
-	
-	/*public void insertarDatos() {
-		try {
-			GestorBD.getMiGestorBD().execSQL("INSERT INTO nivel VALUES nivel=facil, tamanoTablero=8, dinero=180;");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}*/
 
 	public void modificarDatosNivel(int pNivel) {
 		String nivel;
