@@ -924,7 +924,7 @@ public class TableroJuego extends JFrame implements Observer {
 	}
 
 	private void finalizarJuego() {
-		//Battleship.getBattleship().guardarPuntos();
+		Battleship.getBattleship().guardarPuntos();
 		setComponentsEnabled(this, false);
 	}
 

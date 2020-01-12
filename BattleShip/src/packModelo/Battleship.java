@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Observable;
 
 import org.json.JSONArray;
@@ -274,8 +276,11 @@ public class Battleship extends Observable {
 	}
 
 	public void guardarPuntos() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Timestamp timestamp=new Timestamp(System.currentTimeMillis());
+		String ts = sdf.format(timestamp);
 		try {
-			SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario,nivel,fechaHora,puntos) VALUES();");
+			SGBD.getSGBD().execSQL("INSERT INTO Partida VALUES('"+usuario.getNombreUsuario()+"','facil','"+ts+"',"+usuario.getDinero()+");");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
