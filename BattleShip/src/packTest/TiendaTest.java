@@ -87,5 +87,4 @@ public class TiendaTest {
 			e.printStackTrace();
 		}
 	}
-
 }
