@@ -27,7 +27,6 @@ public class TiendaTest {
 		try {
 			ResultSet rs = SGBD.getSGBD().execSQLSelect("SELECT `puntos`, `cuantos`, `nombreArma` FROM partida NATURAL JOIN armamentoJugador WHERE nombreJugador = 'test' AND nombreArma = 'escudos'");
 			int armas = rs.getInt("cuantos");
-			System.out.println(armas);
 			assertEquals(armas, 14);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -40,7 +39,6 @@ public class TiendaTest {
 		try {
 			ResultSet rs = SGBD.getSGBD().execSQLSelect("SELECT `puntos`, `cuantos`, `nombreArma` FROM partida NATURAL JOIN armamentoJugador WHERE nombreJugador = 'test' AND nombreArma = 'misiles'");
 			int armas = rs.getInt("cuantos");
-			System.out.println(armas);
 			assertEquals(armas, 17);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -54,7 +52,6 @@ public class TiendaTest {
 		try {
 			ResultSet rs = SGBD.getSGBD().execSQLSelect("SELECT `puntos`, `cuantos`, `nombreArma` FROM partida NATURAL JOIN armamentoJugador WHERE nombreJugador = 'test' AND nombreArma = 'misilesEO'");
 			int armas = rs.getInt("cuantos");
-			System.out.println(armas);
 			assertEquals(armas, 9);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -67,7 +64,6 @@ public class TiendaTest {
 		try {
 			ResultSet rs = SGBD.getSGBD().execSQLSelect("SELECT `puntos`, `cuantos`, `nombreArma` FROM partida NATURAL JOIN armamentoJugador WHERE nombreJugador = 'test' AND nombreArma = 'misilesNS'");
 			int armas = rs.getInt("cuantos");
-			System.out.println(armas);
 			assertEquals(armas, 8);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -76,15 +72,16 @@ public class TiendaTest {
 	}
 	
 	@Test
-	public void getMisilesBOOM() throws ClassNotFoundException {
+	public void getMisilesBOOM() {
 		try {
 			ResultSet rs = SGBD.getSGBD().execSQLSelect("SELECT `puntos`, `cuantos`, `nombreArma` FROM partida NATURAL JOIN armamentoJugador WHERE nombreJugador = 'test' AND nombreArma = 'misilesBOOM'");
 			int armas = rs.getInt("cuantos");
-			System.out.println(armas);
 			assertEquals(armas, 9);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+
 }
