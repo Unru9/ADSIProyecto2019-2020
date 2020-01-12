@@ -155,7 +155,7 @@ public class menuTienda extends JFrame {
 		btnAtras.setActionCommand("atras");
 						
 		JSONArray pData = gestorTienda.getMiGestorTeinda().getPuntosUsuarioYStock();
-		
+		System.out.println(pData.toString());
 		for(int i = 0; i < pData.length(); i++) {
 			
 			JSONObject dato = pData.getJSONObject(i);
