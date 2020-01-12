@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import org.junit.Test;
 
 import packGestores.SGBD;
+import packGestores.gestorTienda;
 
 public class TiendaTest {
 
@@ -83,5 +84,20 @@ public class TiendaTest {
 		}
 	}
 	
+	public void comprarArma() {
+		try {
+			ResultSet rs = SGBD.getSGBD().execSQLSelect("SELECT `puntos`, `cuantos`, `nombreArma` FROM partida NATURAL JOIN armamentoJugador WHERE nombreJugador = 'test' AND nombreArma = 'escudos'");
+			int armas = rs.getInt("cuantos");
+			System.out.println(armas);
+			assertEquals(armas, 14);
+			gestorTienda.getMiGestorTeinda().comprarArma("escudo");
+			rs = SGBD.getSGBD().execSQLSelect("SELECT `puntos`, `cuantos`, `nombreArma` FROM partida NATURAL JOIN armamentoJugador WHERE nombreJugador = 'test' AND nombreArma = 'escudos'");
+			armas = rs.getInt("cuantos");
+			assertEquals(armas, 15);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }
