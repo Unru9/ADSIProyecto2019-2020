@@ -59,7 +59,7 @@ public class pantallaPrincipal extends JFrame {
 	private pantallaPrincipal() {
 		setTitle("Menu Inicial");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(380, 40, 610, 660);
+		setBounds(100, 100, 610, 660);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -76,6 +76,7 @@ public class pantallaPrincipal extends JFrame {
 				int option = JOptionPane.showOptionDialog(contentPane, "Elija la opci\u00f3n deseada:", "Nivel de dificultad", JOptionPane.DEFAULT_OPTION,
 						JOptionPane.QUESTION_MESSAGE, new ImageIcon(), options, options[0]);
 				GestorNivel.getGestorNivel().modificarDatosNivel(option);
+				
 				Inicio.getInicio().setVisible(true);
 				Inicio.getInicio().empezar();
 				dispose();
@@ -97,26 +98,23 @@ public class pantallaPrincipal extends JFrame {
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new controladorPantPrincipal());
 		btnSalir.setActionCommand("salir");
-		
-		JButton btnConfigurarNivel = new JButton("Configurar Nivel");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(13, Short.MAX_VALUE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 571, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNuevaPartida, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnTienda, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnConfigurarNivel)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnRanking, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnSalir, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))))
+							.addGap(12)
+							.addComponent(btnNuevaPartida)
+							.addGap(30)
+							.addComponent(btnTienda, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
+							.addGap(34)
+							.addComponent(btnRanking, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
+							.addGap(28)
+							.addComponent(btnSalir, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)))
+					.addGap(19))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -125,11 +123,10 @@ public class pantallaPrincipal extends JFrame {
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 560, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNuevaPartida)
 						.addComponent(btnTienda)
-						.addComponent(btnConfigurarNivel)
-						.addComponent(btnRanking)
-						.addComponent(btnSalir))
+						.addComponent(btnSalir)
+						.addComponent(btnNuevaPartida)
+						.addComponent(btnRanking))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
