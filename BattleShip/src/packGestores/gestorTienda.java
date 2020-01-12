@@ -41,10 +41,8 @@ public class gestorTienda {
 			JOptionPane.showMessageDialog(null, "No tienes puntos acumulados", "Error", JOptionPane.ERROR_MESSAGE);
     		return null;
 		}
-		else {
-			
+		else {			
 			datos = crearJSON(rs);
-    		
         	return datos;
 		}
 		
