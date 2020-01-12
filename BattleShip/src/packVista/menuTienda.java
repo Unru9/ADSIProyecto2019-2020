@@ -1,4 +1,3 @@
-
 package packVista;
 
 import java.awt.Font;
@@ -19,6 +18,7 @@ import org.json.JSONObject;
 
 import packControlador.ContTienda.controladorTienda;
 import packGestores.gestorTienda;
+import packModelo.Battleship;
 
 public class menuTienda extends JFrame {
 
@@ -155,7 +155,7 @@ public class menuTienda extends JFrame {
 		btnAtras.setActionCommand("atras");
 						
 		JSONArray pData = gestorTienda.getMiGestorTeinda().getPuntosUsuarioYStock();
-
+		
 		for(int i = 0; i < pData.length(); i++) {
 			
 			JSONObject dato = pData.getJSONObject(i);
