@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import packGestores.GCompartirResultadosRRSS;
@@ -17,6 +18,10 @@ import packModelo.packJugador.Usuario;
 
 public class CompartirResultadosTest {
 	
+	@Before
+	public void init() {
+		clean();
+	}
 	
 	@Test
 	public void testNoResultados() {
