@@ -81,7 +81,7 @@ public class VentanaJuegoGanador extends JFrame {
 				JSONObject res;
 				try {
 					res=BattleShip.obtDatos();
-					RRSS.compartirTwitter(res.getString("nombreUsuario"), res.getInt("puntos"),3, res.getInt("puntosHistoricos"));
+					RRSS.compartirTwitter(res.getString("nombreUsuario"), res.getInt("puntos"),res.getInt("numPremios"),res.getInt("puntosHistoricos"));
 				} catch (IOException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
@@ -116,7 +116,7 @@ public class VentanaJuegoGanador extends JFrame {
 				JSONObject res;
 				try {
 					res=BattleShip.obtDatos();
-					RRSS.compartirWhatsApp(res.getString("nombreUsuario"), res.getInt("puntos"),1, res.getInt("puntosHistoricos"));
+					RRSS.compartirWhatsApp(res.getString("nombreUsuario"), res.getInt("puntos"),res.getInt("numPremios"),res.getInt("puntosHistoricos"));
 				} catch (IOException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
@@ -155,7 +155,7 @@ public class VentanaJuegoGanador extends JFrame {
 				JSONObject res;
 				try {
 					res=BattleShip.obtDatos();
-					RRSS.compartirReddit(res.getString("nombreUsuario"), res.getInt("puntos"),0, res.getInt("puntosHistoricos"));
+					RRSS.compartirReddit(res.getString("nombreUsuario"), res.getInt("puntos"),res.getInt("numPremios"), res.getInt("puntosHistoricos"));
 				} catch (IOException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
