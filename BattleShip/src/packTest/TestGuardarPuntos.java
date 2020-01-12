@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import org.junit.Test;
 
 import packGestores.SGBD;
+import packModelo.Battleship;
+import packModelo.packJugador.Usuario;
 
 public class TestGuardarPuntos {
 
@@ -24,6 +26,17 @@ public class TestGuardarPuntos {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Usuario us = new Usuario();
+		us.setNombreUsuario("test");
+		Battleship.getBattleship().setUsuario(us);
+		Battleship.getBattleship().guardarPuntos();
+		try {
+			SGBD.getSGBD().execSQL("DELETE FROM Partida WHERE nombreUsuario='test';");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }
