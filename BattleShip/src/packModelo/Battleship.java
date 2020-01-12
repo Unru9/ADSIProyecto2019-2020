@@ -252,12 +252,11 @@ public class Battleship extends Observable {
 			obj.put("puntos",ptosPartida);
 			
 			// OBT NUM PREMIOS
-			/*ResultSet rt= BD.execSQLSelect("SELECT premio FROM Logro INNER JOIN LogrosJugador WHERE LogrosJugador.nombreUsuario=%nombreUsuario% AND Logro.completado='true'");
+			ResultSet rt= SGBD.getSGBD().execSQLSelect("SELECT COUNT(*) as numPremios FROM Logro INNER JOIN LogrosJugador WHERE Logro.nombre=LogrosJugador.nombreLogro AND Logro.completado='true' AND LogrosJugador.nombreUsuario='"+nombreUsuario+"'");
 			rt.next();
-				numPremios= rt.getInt("premio");
-				
+				numPremios= rt.getInt("numPremios");
 			rt.close();
-			obj.put("numPremios", numPremios);*/
+			obj.put("numPremios", numPremios);
 			
 			//OBT PUNTOS HISTORICOS
 			ResultSet rt1= SGBD.getSGBD().execSQLSelect("SELECT SUM(puntos) as sumPuntos FROM Partida where nombreUsuario='"+nombreUsuario+"'");
