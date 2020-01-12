@@ -821,7 +821,7 @@ public class TableroJuego extends JFrame implements Observer {
 				}
 				if (Battleship.getBattleship().hasPerdido() && Battleship.getBattleship().getAvisar()) {
 					System.out.println("HAS PERDIDO\n");
-					//JOptionPane.showMessageDialog(null, "ï¿½Has perdido!", "Alerta", JOptionPane.WARNING_MESSAGE);
+					//JOptionPane.showMessageDialog(null, "¡Has perdido!", "Alerta", JOptionPane.WARNING_MESSAGE);
 					VentanaJuegoPerdedor c= new VentanaJuegoPerdedor();
 					c.setVisible(true);
 					Battleship.getBattleship().noAvisarMas();
@@ -841,7 +841,7 @@ public class TableroJuego extends JFrame implements Observer {
 				}
 				break;
 			}
-			// Ordenador notifica si le tocan o destruyen algï¿½n barco
+			// Ordenador notifica si le tocan o destruyen algún barco
 		} else if (observable instanceof Ordenador) {
 			String[] splitted = ((String) parametro).split(";");
 			String what = splitted[0]; // Lo que ha ocurrido
@@ -864,7 +864,7 @@ public class TableroJuego extends JFrame implements Observer {
 				}
 				if (Battleship.getBattleship().hasGanado() && Battleship.getBattleship().getAvisar()) {
 					System.out.println("HAS GANADO\n");
-					//JOptionPane.showMessageDialog(null, "ï¿½Has ganado!", "Alerta", JOptionPane.WARNING_MESSAGE);
+					//JOptionPane.showMessageDialog(null, "¡Has ganado!", "Alerta", JOptionPane.WARNING_MESSAGE);
 					VentanaJuegoGanador c = new VentanaJuegoGanador();
 					c.setVisible(true);
 					Battleship.getBattleship().noAvisarMas();
@@ -883,7 +883,7 @@ public class TableroJuego extends JFrame implements Observer {
 			case "detectado":
 				i = Integer.parseInt(coordenada[0]);
 				j = Integer.parseInt(coordenada[1]);
-				// Sabemos que estï¿½ y que aï¿½n tiene escudo
+				// Sabemos que está y que aún tiene escudo
 				tableroOrd[i][j].setBackground(Color.GREEN);
 				tableroOrd[i][j].setEnabled(true);
 				//tableroOrd[i][j].enable();
@@ -924,7 +924,6 @@ public class TableroJuego extends JFrame implements Observer {
 	}
 
 	private void finalizarJuego() {
-		//Battleship.getBattleship().guardarPuntos();
 		setComponentsEnabled(this, false);
 	}
 

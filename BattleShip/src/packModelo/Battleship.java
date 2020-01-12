@@ -272,13 +272,4 @@ public class Battleship extends Observable {
 	public void setUsuario(Usuario pUsuario) {
 		this.usuario=pUsuario;
 	}
-
-	public void guardarPuntos() {
-		try {
-			SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario,nivel,fechaHora,puntos) VALUES();");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }
