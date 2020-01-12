@@ -19,6 +19,7 @@ public class controladorTienda implements ActionListener {
 		if(action.equals("atras")) {
 			try {
 				menuTienda.getMiMenuTienda().dispose();
+				pantallaPrincipal.getMiPantallaPrincipal().setVisible(true);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
