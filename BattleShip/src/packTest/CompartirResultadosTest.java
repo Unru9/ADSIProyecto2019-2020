@@ -51,7 +51,7 @@ public class CompartirResultadosTest {
 			rt1.close();
 			clean();
 			
-			//GCompartirResultadosRRSS.getcompartirResultadosRRSS().compartirTwitter(u.getNombreUsuario(), u.getDinero(),numPremios,puntosHistoricos);
+			GCompartirResultadosRRSS.getcompartirResultadosRRSS().compartirTwitter(u.getNombreUsuario(), u.getDinero(),numPremios,puntosHistoricos);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Error al cargar datos en bd");
@@ -89,7 +89,7 @@ public class CompartirResultadosTest {
 			rt1.close();
 			clean();
 			
-			//GCompartirResultadosRRSS.getcompartirResultadosRRSS().compartirWhatsApp(u.getNombreUsuario(), u.getDinero(),numPremios,puntosHistoricos);
+			GCompartirResultadosRRSS.getcompartirResultadosRRSS().compartirWhatsApp(u.getNombreUsuario(), u.getDinero(),numPremios,puntosHistoricos);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Error al cargar datos en bd");
@@ -134,7 +134,7 @@ public class CompartirResultadosTest {
 			rt1.close();
 			clean();
 			
-			//GCompartirResultadosRRSS.getcompartirResultadosRRSS().compartirReddit(u.getNombreUsuario(), u.getDinero(),numPremios,puntosHistoricos);
+			GCompartirResultadosRRSS.getcompartirResultadosRRSS().compartirReddit(u.getNombreUsuario(), u.getDinero(),numPremios,puntosHistoricos);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Error al cargar datos en bd");
