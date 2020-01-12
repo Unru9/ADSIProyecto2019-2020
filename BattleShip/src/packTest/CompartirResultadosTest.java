@@ -20,13 +20,7 @@ public class CompartirResultadosTest {
 	/*Test Caso Compartir Twitter*/
 	@Test
 	public void testCompartirResultadosTwitter() throws IOException, URISyntaxException, SQLException {
-		clean();
-		//INSERCIÓN Y CREACIÓN DE TABLAS
-		SGBD.getSGBD().execSQL("INSERT INTO Usuario(nombreUsuario) VALUES('test1');");
-		SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario,nivel,puntos) VALUES('test1',1,100);");
-		SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario,nivel,puntos) VALUES('test1',1,150);");
-		SGBD.getSGBD().execSQL("INSERT INTO Logro(nombre,premio,completado) VALUES('nombreLogroEjemplo','3','true');");
-		SGBD.getSGBD().execSQL("INSERT INTO LogrosJugador(nombreUsuario,nombreLogro) VALUES('test1','nombreLogroEjemplo');");
+		insert();
 		
 		try {
 			int puntosHistoricos=0;
@@ -42,11 +36,11 @@ public class CompartirResultadosTest {
 			u.comprarArma(1);
 			assertEquals(u.getDinero(), 115);
 			
-			ResultSet rt= SGBD.getSGBD().execSQLSelect("SELECT premio FROM Logro INNER JOIN LogrosJugador WHERE Logro.nombre=LogrosJugador.nombreLogro AND LogrosJugador.nombreUsuario='test1' AND Logro.completado='true'");
+			ResultSet rt= SGBD.getSGBD().execSQLSelect("SELECT COUNT(*) as numPremios FROM Logro INNER JOIN LogrosJugador WHERE Logro.nombre=LogrosJugador.nombreLogro AND LogrosJugador.nombreUsuario='test1' AND Logro.completado='true'");
 			rt.next();
-			numPremios= rt.getInt("premio");
-			assertEquals(numPremios,3);
-			//System.out.println(numPremios);
+			numPremios= rt.getInt("numPremios");
+			assertEquals(numPremios,1);
+
 			rt.close();
 			
 			//PUNTOS HISTÓRICOS
@@ -54,8 +48,8 @@ public class CompartirResultadosTest {
 			rt1.next();
 			puntosHistoricos= rt1.getInt("sumPuntos");
 			assertEquals(puntosHistoricos,250);
-			//System.out.println(puntosHistoricos);
 			rt1.close();
+			clean();
 			
 			//GCompartirResultadosRRSS.getcompartirResultadosRRSS().compartirTwitter(u.getNombreUsuario(), u.getDinero(),numPremios,puntosHistoricos);
 		} catch (SQLException e) {
@@ -68,15 +62,7 @@ public class CompartirResultadosTest {
 	/*Test Caso Compartir WhatsApp*/
 	@Test
 	public void testCompartirResultadosWhatsApp() throws IOException, URISyntaxException, SQLException {
-		clean();
-		//INSERCIÓN Y CREACIÓN DE TABLAS
-		SGBD.getSGBD().execSQL("INSERT INTO Usuario(nombreUsuario) VALUES('test2');");
-		SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario,nivel,puntos) VALUES('test2',1,100);");
-		SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario,nivel,puntos) VALUES('test2',1,150);");
-		SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario,nivel,puntos) VALUES('test2',1,50);");
-		SGBD.getSGBD().execSQL("INSERT INTO Logro(nombre,premio,completado) VALUES('nombreLogroEjemplo','1','true');");
-		SGBD.getSGBD().execSQL("INSERT INTO LogrosJugador(nombreUsuario,nombreLogro) VALUES('test2','nombreLogroEjemplo');");
-		
+		insert();
 		try {
 			int puntosHistoricos=0;
 			int numPremios=0;
@@ -89,11 +75,10 @@ public class CompartirResultadosTest {
 			u.comprarArma(0);
 			assertEquals(u.getDinero(), 125);	
 			
-			ResultSet rt= SGBD.getSGBD().execSQLSelect("SELECT premio FROM Logro INNER JOIN LogrosJugador WHERE Logro.nombre=LogrosJugador.nombreLogro AND LogrosJugador.nombreUsuario='test2' AND Logro.completado='true'");
+			ResultSet rt= SGBD.getSGBD().execSQLSelect("SELECT COUNT(*) as numPremios FROM Logro INNER JOIN LogrosJugador WHERE Logro.nombre=LogrosJugador.nombreLogro AND LogrosJugador.nombreUsuario='test2' AND Logro.completado='true'");
 			rt.next();
-			numPremios= rt.getInt("premio");
-			assertEquals(numPremios,1);
-			//System.out.println(numPremios);
+			numPremios= rt.getInt("numPremios");
+			assertEquals(numPremios,3);
 			rt.close();
 			
 			//PUNTOS HISTÓRICOS
@@ -101,8 +86,8 @@ public class CompartirResultadosTest {
 			rt1.next();
 			puntosHistoricos= rt1.getInt("sumPuntos");
 			assertEquals(puntosHistoricos,300);
-			//System.out.println(puntosHistoricos);
 			rt1.close();
+			clean();
 			
 			//GCompartirResultadosRRSS.getcompartirResultadosRRSS().compartirWhatsApp(u.getNombreUsuario(), u.getDinero(),numPremios,puntosHistoricos);
 		} catch (SQLException e) {
@@ -112,15 +97,10 @@ public class CompartirResultadosTest {
 		}
 	}
 	
-	/*Test Caso Compartir Twitter*/
+	/*Test Caso Compartir Reddit*/
 	@Test
 	public void testCompartirResultadosReddit() throws IOException, URISyntaxException, SQLException {
-		clean();
-		//INSERCIÓN Y CREACIÓN DE TABLAS
-		SGBD.getSGBD().execSQL("INSERT INTO Usuario(nombreUsuario) VALUES('test3');");
-		SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario,nivel,puntos) VALUES('test3',3,100);");
-		SGBD.getSGBD().execSQL("INSERT INTO Logro(nombre,premio,completado) VALUES('nombreLogroEjemplo','0','true');");
-		SGBD.getSGBD().execSQL("INSERT INTO LogrosJugador(nombreUsuario,nombreLogro) VALUES('test3','nombreLogroEjemplo');");
+		insert();
 		
 		try {
 			int puntosHistoricos=0;
@@ -140,11 +120,10 @@ public class CompartirResultadosTest {
 			u.comprarArma(3);
 			assertEquals(u.getDinero(), 25);
 			
-			ResultSet rt= SGBD.getSGBD().execSQLSelect("SELECT premio FROM Logro INNER JOIN LogrosJugador WHERE Logro.nombre=LogrosJugador.nombreLogro AND LogrosJugador.nombreUsuario='test3' AND Logro.completado='true'");
+			ResultSet rt= SGBD.getSGBD().execSQLSelect("SELECT COUNT(*) as numPremios FROM Logro INNER JOIN LogrosJugador WHERE Logro.nombre=LogrosJugador.nombreLogro AND LogrosJugador.nombreUsuario='test3' AND Logro.completado='true'");
 			rt.next();
-			numPremios= rt.getInt("premio");
-			assertEquals(numPremios,0);
-			//System.out.println(numPremios);
+			numPremios= rt.getInt("numPremios");
+			assertEquals(numPremios,2);
 			rt.close();
 			
 			//PUNTOS HISTÓRICOS
@@ -152,10 +131,10 @@ public class CompartirResultadosTest {
 			rt1.next();
 			puntosHistoricos= rt1.getInt("sumPuntos");
 			assertEquals(puntosHistoricos,100);
-			//System.out.println(puntosHistoricos);
 			rt1.close();
+			clean();
 			
-			//GCompartirResultadosRRSS.getcompartirResultadosRRSS().compartirTwitter(u.getNombreUsuario(), u.getDinero(),numPremios,puntosHistoricos);
+			//GCompartirResultadosRRSS.getcompartirResultadosRRSS().compartirReddit(u.getNombreUsuario(), u.getDinero(),numPremios,puntosHistoricos);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Error al cargar datos en bd");
@@ -170,21 +149,55 @@ public class CompartirResultadosTest {
 			//BORRAR DATOS TWITTER
 			SGBD.getSGBD().execSQL("DELETE FROM Usuario WHERE nombreUsuario='test1';");
 			SGBD.getSGBD().execSQL("DELETE FROM Partida WHERE nombreUsuario='test1';");
-			SGBD.getSGBD().execSQL("DELETE FROM Logro WHERE nombre='nombreLogroEjemplo';");
+			SGBD.getSGBD().execSQL("DELETE FROM Logro WHERE nombre='nombreLogroEjemplo1';");
 			SGBD.getSGBD().execSQL("DELETE FROM LogrosJugador WHERE nombreUsuario='test1';");
 			
 			//BORRAR DATOS WHATSAPP
 			SGBD.getSGBD().execSQL("DELETE FROM Usuario WHERE nombreUsuario='test2';");
 			SGBD.getSGBD().execSQL("DELETE FROM Partida WHERE nombreUsuario='test2';");
-			SGBD.getSGBD().execSQL("DELETE FROM Logro WHERE nombre='nombreLogroEjemplo';");
+			SGBD.getSGBD().execSQL("DELETE FROM Logro WHERE nombre='nombreLogroEjemplo2';");
 			SGBD.getSGBD().execSQL("DELETE FROM LogrosJugador WHERE nombreUsuario='test2';");
 			
 			//BORRAR DATOS REDDIT
 			SGBD.getSGBD().execSQL("DELETE FROM Usuario WHERE nombreUsuario='test3';");
 			SGBD.getSGBD().execSQL("DELETE FROM Partida WHERE nombreUsuario='test3';");
-			SGBD.getSGBD().execSQL("DELETE FROM Logro WHERE nombre='nombreLogroEjemplo';");
+			SGBD.getSGBD().execSQL("DELETE FROM Logro WHERE nombre='nombreLogroEjemplo3';");
 			SGBD.getSGBD().execSQL("DELETE FROM LogrosJugador WHERE nombreUsuario='test3';");
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error al cargar datos en bd");
+			e.printStackTrace();
+		}
+	}
+	
+	//INSERCIÓN Y CREACIÓN DE TABLAS
+	public void insert() {
+		try {
+			//INSERCIÓN Y CREACIÓN DE TABLAS TWITTER
+			SGBD.getSGBD().execSQL("INSERT INTO Usuario(nombreUsuario) VALUES('test1');");
+			SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario,nivel,puntos) VALUES('test1',1,100);");
+			SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario,nivel,puntos) VALUES('test1',1,150);");
+			SGBD.getSGBD().execSQL("INSERT INTO Logro(nombre,premio,completado) VALUES('nombreLogroEjemplo1','2','true');");
+			SGBD.getSGBD().execSQL("INSERT INTO LogrosJugador(nombreUsuario,nombreLogro) VALUES('test1','nombreLogroEjemplo1');");
+			
+			//INSERCIÓN Y CREACIÓN DE TABLAS WHATSAPP
+			SGBD.getSGBD().execSQL("INSERT INTO Usuario(nombreUsuario) VALUES('test2');");
+			SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario,nivel,puntos) VALUES('test2',1,100);");
+			SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario,nivel,puntos) VALUES('test2',1,150);");
+			SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario,nivel,puntos) VALUES('test2',1,50);");
+			SGBD.getSGBD().execSQL("INSERT INTO Logro(nombre,premio,completado) VALUES('nombreLogroEjemplo2','1','true');");
+			SGBD.getSGBD().execSQL("INSERT INTO Logro(nombre,premio,completado) VALUES('nombreLogroEjemplo2','2','true');");
+			SGBD.getSGBD().execSQL("INSERT INTO Logro(nombre,premio,completado) VALUES('nombreLogroEjemplo2','3','true');");
+			SGBD.getSGBD().execSQL("INSERT INTO LogrosJugador(nombreUsuario,nombreLogro) VALUES('test2','nombreLogroEjemplo2');");
+			
+			//INSERCIÓN Y CREACIÓN DE TABLAS REDDIT
+			SGBD.getSGBD().execSQL("INSERT INTO Usuario(nombreUsuario) VALUES('test3');");
+			SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario,nivel,puntos) VALUES('test3',3,100);");
+			SGBD.getSGBD().execSQL("INSERT INTO Logro(nombre,premio,completado) VALUES('nombreLogroEjemplo3','1','true');");
+			SGBD.getSGBD().execSQL("INSERT INTO Logro(nombre,premio,completado) VALUES('nombreLogroEjemplo3','2','true');");
+			SGBD.getSGBD().execSQL("INSERT INTO LogrosJugador(nombreUsuario,nombreLogro) VALUES('test3','nombreLogroEjemplo3');");
+			
+		}catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Error al cargar datos en bd");
 			e.printStackTrace();
