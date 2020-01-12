@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import packControlador.ContTienda.controladorTienda;
 import packGestores.gestorTienda;
+import packModelo.Battleship;
 
 public class menuTienda extends JFrame {
 

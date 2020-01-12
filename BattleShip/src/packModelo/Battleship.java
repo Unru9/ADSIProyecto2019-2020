@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Observable;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -220,25 +221,24 @@ public class Battleship extends Observable {
 		} catch (BarcoNoEncException e) {}
 	}
 	
-	public JSONObject rankingUsuarioGeneral() {
+	public JSONArray rankingUsuarioGeneral() {
 		return GRanking.getGRankoing().rankingUsuarioGeneral(usuario);
 	}
 	
-	public JSONObject rankingUsuarioPorNiv() {
+	public JSONArray rankingUsuarioPorNiv() {
 		return GRanking.getGRankoing().rankingUsuarioPorNiv(usuario);
 	}
 	
-	public JSONObject rankingGlobalGeneral() {
+	public JSONArray rankingGlobalGeneral() {
 		return GRanking.getGRankoing().rankingGlobalGeneral();
 	}
 	
-	public JSONObject rankingGlobalPorNiv() {
+	public JSONArray rankingGlobalPorNiv() {
 		return GRanking.getGRankoing().rankingGlobalPorNiv();
 	}
 	
 	public JSONObject  obtDatos() throws SQLException, JSONException{
-		JSONObject obj = new JSONObject();
-		GCompartirResultadosRRSS RRSS= GCompartirResultadosRRSS.getcompartirResultadosRRSS();
+		JSONObject obj = new JSONObject();;
 		GestorBD BD = GestorBD.getMiGestorBD();
 		int puntosHistoricos=0;
 		int numPremios=0;
@@ -250,24 +250,35 @@ public class Battleship extends Observable {
 			obj.put("puntos",ptosPartida);
 			
 			// OBT NUM PREMIOS
-			ResultSet rt= SGBD.getSGBD().execSQLSelect("SELECT premio FROM Logro INNER JOIN LogrosJugador WHERE LogrosJugador.nombreUsuario=%nombreUsuario% AND Logro.completado='true'");
-			while(rt.next()){
+			ResultSet rt= BD.execSQLSelect("SELECT premio FROM Logro INNER JOIN LogrosJugador WHERE LogrosJugador.nombreUsuario=%nombreUsuario% AND Logro.completado='true'");
+			rt.next();
 				numPremios= rt.getInt("premio");
 				
-			}
 			rt.close();
 			obj.put("numPremios", numPremios);
 			
-			//OBT PUNTOS HISTÓRICOS
-			ResultSet rt1= SGBD.getSGBD().execSQLSelect("SELECT SUM(puntos) as sumPuntos FROM Partida where nombreUsuario=%nombreUsuario%");
-			while(rt1.next()){
+			//OBT PUNTOS HISTï¿½RICOS
+			ResultSet rt1= BD.execSQLSelect("SELECT SUM(puntos) as sumPuntos FROM Partida where nombreUsuario=%nombreUsuario%");
+			rt1.next();
 				puntosHistoricos= rt1.getInt("sumPuntos");
-			}
 			rt1.close();
-			obj.put("puntosHistóricos", puntosHistoricos);
+			obj.put("puntosHistï¿½ricos", puntosHistoricos);
 		}
 		
 		return obj;
 		
+	}
+	
+	public void setUsuario(Usuario pUsuario) {
+		this.usuario=pUsuario;
+	}
+
+	public void guardarPuntos() {
+		try {
+			SGBD.getSGBD().execSQL("INSERT INTO Partida(nombreUsuario,nivel,fechaHora,puntos) VALUES();");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

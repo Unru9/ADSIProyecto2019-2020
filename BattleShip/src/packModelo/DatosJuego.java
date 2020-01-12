@@ -1,20 +1,22 @@
 package packModelo;
 
+import java.util.HashMap;
+
 public class DatosJuego {
 
-	public static final int FILAS_TABLERO = 10;
-	public static final int COLUMNAS_TABLERO = 10;
-	public static final int DINERO_INICIAL = 150;
-	public static final int VALOR_ESCUDO = 2;
+	public static int FILAS_TABLERO = 10;
+	public static int COLUMNAS_TABLERO = 10;
+	public static int DINERO_INICIAL = 150;
+	public static int VALOR_ESCUDO = 2;
 	public static final int NUM_ARMAS = 5; // Numero de armas diferentes
 
 	// Numero inicializacion armamento
-	public static final int INI_MISIL = 3;
-	public static final int INI_MISIL_NS = 1;
-	public static final int INI_MISIL_EO = 1;
-	public static final int INI_MISIL_BOOM = 0;
-	public static final int INI_ESCUDO = 2;
-	public static final int INI_USOS_RADAR = 2;
+	public static int INI_MISIL = 3;
+	public static int INI_MISIL_NS = 1;
+	public static int INI_MISIL_EO = 1;
+	public static int INI_MISIL_BOOM = 0;
+	public static int INI_ESCUDO = 2;
+	public static int INI_USOS_RADAR = 2;
 
 	// Numero id arma
 	public static final int NUM_MISIL = 1;
@@ -69,5 +71,19 @@ public class DatosJuego {
 			longitud = LONG_PORTAAVIONES;
 		}
 		return longitud;
+	}
+
+	public static void modificarDatosJuego(HashMap<String, Integer> pArmas, int pTab, int pDin) {
+			FILAS_TABLERO = pTab;
+			COLUMNAS_TABLERO = pTab;
+			
+			DINERO_INICIAL = pDin;
+			
+			INI_MISIL = pArmas.get("misiles");
+			INI_MISIL_NS = pArmas.get("misilesNS");
+			INI_MISIL_EO = pArmas.get("misilesEO");
+			INI_MISIL_BOOM = pArmas.get("misilesBOOM");
+			INI_ESCUDO = pArmas.get("escudos");
+			INI_USOS_RADAR = pArmas.get("radar");		
 	}
 }

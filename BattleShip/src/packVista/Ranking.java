@@ -2,6 +2,8 @@ package packVista;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -57,8 +59,16 @@ public class Ranking extends JFrame {
 		JPanel bottom = new JPanel();
 		contentPane.add(bottom, BorderLayout.SOUTH);
 		
-		JButton btnOki = new JButton("OKI");
-		bottom.add(btnOki);
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				dispose();
+			}
+		});
+		bottom.add(btnAceptar);
+		
 		
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
@@ -67,17 +77,20 @@ public class Ranking extends JFrame {
 		
 		switch(string) {
 		case "PersonalGeneral":
-			System.out.println("entra");
+			System.out.println("entra PersonalGeneral");
 			cargarPersonaGeneral();
 			break;
 		case "PersonalPor Niveles":
+			System.out.println("entra PersonalPor Niveles");
 			cargarPersonaPorNivel();
 			break;
 		case "GlobalGeneral":
 			cargarGlobalGeneral();
+			System.out.println("entra GlobalGeneral");
 			break;
 		case "GlobalPor Niveles":
 			cargarGlobalPorNivel();
+			System.out.println("entra GlobalPor Niveles");
 			break;
 		}
 		
@@ -88,17 +101,100 @@ public class Ranking extends JFrame {
 
 	private void cargarGlobalPorNivel() {
 		// TODO Auto-generated method stub
-		JSONObject json=Battleship.getBattleship().rankingGlobalPorNiv();
+		JSONArray json=Battleship.getBattleship().rankingGlobalPorNiv();
+		model.addColumn("nombre");
+		model.addColumn("puntos facil");
+		model.addColumn("nombre");
+		model.addColumn("puntos normal");
+		model.addColumn("nombre");
+		model.addColumn("puntos dificil");
+		int facil=0;
+		int normal=0;
+		int dificil=0;
+		int row=-1;
+		for (int i = 0; i<json.length();i++) {
+			try {
+				JSONObject jsonO = (JSONObject) json.get(i);
+				String nivel = jsonO.getString("nivel");
+				if(row<facil || row<normal || row<dificil) {
+					model.addRow(new Object[] {});
+					row++;
+				}
+				if(nivel.equals("facil")) {
+					model.setValueAt(jsonO.getString("nombre"), facil, 0);
+					model.setValueAt(jsonO.getInt("puntos"), facil, 1);
+					facil++;
+				}else if(nivel.equals("normal")) {
+					model.setValueAt(jsonO.getString("nombre"), normal, 2);
+					model.setValueAt(jsonO.getInt("puntos"), normal, 3);
+					normal++;
+				}else if(nivel.equals("dificil")) {
+					model.setValueAt(jsonO.getString("nombre"), dificil, 4);
+					model.setValueAt(jsonO.getInt("puntos"), dificil, 5);
+					dificil++;
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+		}
 	}
 
 	private void cargarGlobalGeneral() {
 		// TODO Auto-generated method stub
-		JSONObject json=Battleship.getBattleship().rankingGlobalGeneral();
+		JSONArray json=Battleship.getBattleship().rankingGlobalGeneral();
+		model.addColumn("nombre");
+		model.addColumn("puntos");
+		for (int i = 0; i<json.length();i++) {
+			try {
+				JSONObject jsonO = (JSONObject) json.get(i);
+				model.addRow(new Object[] {jsonO.get("nombre"),jsonO.getInt("puntos")});
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+		}
 	}
 
 	private void cargarPersonaPorNivel() {
 		// TODO Auto-generated method stub
-		JSONObject json=Battleship.getBattleship().rankingUsuarioPorNiv();
+		JSONArray json=Battleship.getBattleship().rankingUsuarioPorNiv();
+		model.addColumn("nombre");
+		model.addColumn("puntos facil");
+		model.addColumn("nombre");
+		model.addColumn("puntos normal");
+		model.addColumn("nombre");
+		model.addColumn("puntos dificil");
+		int facil=0;
+		int normal=0;
+		int dificil=0;
+		int row=-1;
+		for (int i = 0; i<json.length();i++) {
+			try {
+				JSONObject jsonO = (JSONObject) json.get(i);
+				String nivel = jsonO.getString("nivel");
+				if(row<facil || row<normal || row<dificil) {
+					model.addRow(new Object[] {});
+					row++;
+				}
+				if(nivel.equals("facil")) {
+					model.setValueAt(jsonO.getString("nombre"), facil, 0);
+					model.setValueAt(jsonO.getInt("puntos"), facil, 1);
+					facil++;
+				}else if(nivel.equals("normal")) {
+					model.setValueAt(jsonO.getString("nombre"), normal, 2);
+					model.setValueAt(jsonO.getInt("puntos"), normal, 3);
+					normal++;
+				}else if(nivel.equals("dificil")) {
+					model.setValueAt(jsonO.getString("nombre"), dificil, 4);
+					model.setValueAt(jsonO.getInt("puntos"), dificil, 5);
+					dificil++;
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+		}
 	}
 
 	private void cargarPersonaGeneral() {
@@ -106,7 +202,7 @@ public class Ranking extends JFrame {
 		JSONArray json=Battleship.getBattleship().rankingUsuarioGeneral();
 		model.addColumn("nombre");
 		model.addColumn("puntos");
-		for (int i = 0; i<=json.length();i++) {
+		for (int i = 0; i<json.length();i++) {
 			try {
 				JSONObject jsonO = (JSONObject) json.get(i);
 				model.addRow(new Object[] {jsonO.get("nombre"),jsonO.getInt("puntos")});
