@@ -17,6 +17,19 @@ import packModelo.packJugador.Usuario;
 
 public class CompartirResultadosTest {
 	
+	
+	@Test
+	public void testNoResultados() {
+		try {
+			ResultSet rs = SGBD.getSGBD().execSQLSelect("SELECT nombreUsuario,puntos FROM Partida WHERE nombreUsuario='test1';");
+			Boolean next = rs.next();
+			assertEquals(next, false);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	/*Test Caso Compartir Twitter*/
 	@Test
 	public void testCompartirResultadosTwitter() throws IOException, URISyntaxException, SQLException {
